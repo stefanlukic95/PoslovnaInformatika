@@ -1,7 +1,13 @@
 package poslovnaBanka.drzava;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Drzave")
 public class Drzava {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String sifra_drzave;
     private String naziv;
@@ -34,5 +40,14 @@ public class Drzava {
 
     public void setNaziv(String naziv) {
         this.naziv = naziv;
+    }
+
+    @Override
+    public String toString() {
+        return "Drzava{" +
+                "id=" + id +
+                ", sifra_drzave='" + sifra_drzave + '\'' +
+                ", naziv=" + naziv +
+                '}';
     }
 }
