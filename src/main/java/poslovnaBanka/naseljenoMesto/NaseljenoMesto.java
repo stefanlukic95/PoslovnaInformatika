@@ -1,7 +1,13 @@
 package poslovnaBanka.naseljenoMesto;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "NaseljenoMesto")
 public class NaseljenoMesto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int sifra_mesta;
     private String naziv;

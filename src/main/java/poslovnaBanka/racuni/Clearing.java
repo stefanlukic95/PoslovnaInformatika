@@ -1,9 +1,14 @@
 package poslovnaBanka.racuni;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "Clearing")
 public class Clearing {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String id_poruke;
     private double ukupan_iznos;

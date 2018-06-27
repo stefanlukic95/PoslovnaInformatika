@@ -1,7 +1,11 @@
 package poslovnaBanka.klijent;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
+@Entity
+@Table(name ="FizickoLice")
 public class FizickoLice extends Klijent {
 
     private String br_licnek;

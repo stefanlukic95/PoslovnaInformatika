@@ -1,9 +1,14 @@
 package poslovnaBanka.klijent;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "Klijent")
 public class Klijent {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String naziv;
     private String email;

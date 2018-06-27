@@ -1,7 +1,13 @@
 package poslovnaBanka.kurs;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "KursValuti")
 public class KursValuti {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int redni_br;
     private double kupovni;

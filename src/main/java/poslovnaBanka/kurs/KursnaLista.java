@@ -1,9 +1,14 @@
 package poslovnaBanka.kurs;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "KursnaLista")
 public class KursnaLista {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Date datum;
     private String br_kursnel;

@@ -1,7 +1,13 @@
 package poslovnaBanka.banka;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Banka")
 public class Banka {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
     private String sifra_banke;
     private String PIB;

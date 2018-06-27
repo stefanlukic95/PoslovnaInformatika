@@ -1,9 +1,14 @@
 package poslovnaBanka.racuni;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "DnevnoStanjeRacuna")
 public class DnevnoStanjeRacuna {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long br_racuna;
     private Date datum_prometa;

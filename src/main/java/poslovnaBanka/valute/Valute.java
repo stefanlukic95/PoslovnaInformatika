@@ -1,7 +1,13 @@
 package poslovnaBanka.valute;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Valute")
 public class Valute {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int id_valute;
     private String sifra;

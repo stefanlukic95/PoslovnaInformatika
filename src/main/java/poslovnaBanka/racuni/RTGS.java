@@ -1,7 +1,13 @@
 package poslovnaBanka.racuni;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "RTGS")
 public class RTGS {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String id_poruke;
 

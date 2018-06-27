@@ -1,9 +1,13 @@
 package poslovnaBanka.analitikaIzvoda;
 
+import javax.persistence.*;
 import java.util.Date;
-
+@Entity
+@Table(name = "AnalitikaIzvoda")
 public class AnalitikaIzvoda {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long br_stavke;
     private String duznik;
