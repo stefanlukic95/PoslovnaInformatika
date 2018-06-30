@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import poslovnaBanka.naseljenoMesto.NaseljenoMesto;
+import poslovnaBanka.naseljenoMesto.NaseljenoMestoService;
 
 import java.awt.*;
 import java.util.List;
@@ -18,7 +20,6 @@ public class DrzavaController {
 
     @Autowired
     private DrzavaService drzavaService;
-
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -55,6 +56,7 @@ public class DrzavaController {
     )
     public ResponseEntity<Drzava> insertDrzava(@RequestBody Drzava drzava) throws Exception{
         Drzava createdDrzava  = this.drzavaService.create(drzava);
+
         return new ResponseEntity<Drzava>(createdDrzava, HttpStatus.CREATED);
     }
 

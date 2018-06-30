@@ -1,6 +1,9 @@
 package poslovnaBanka.drzava;
 
+import poslovnaBanka.naseljenoMesto.NaseljenoMesto;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Drzave")
@@ -11,14 +14,18 @@ public class Drzava {
     private long id;
     private String sifra_drzave;
     private String naziv;
+    @ManyToOne
+    private NaseljenoMesto naseljenoMesto;
+
 
     public Drzava(){
 
     }
 
-    public Drzava(String sifra_drzave, String naziv) {
+    public Drzava(String sifra_drzave, String naziv, NaseljenoMesto naseljenoMesto) {
         this.sifra_drzave = sifra_drzave;
         this.naziv = naziv;
+        this.naseljenoMesto = naseljenoMesto;
     }
 
     public long getId() {
@@ -42,12 +49,20 @@ public class Drzava {
         this.naziv = naziv;
     }
 
-    @Override
+    public NaseljenoMesto getNaseljenoMesto() {
+        return naseljenoMesto;
+    }
+
+    public void setNaseljenoMesto(NaseljenoMesto naseljenoMesto) {
+        this.naseljenoMesto = naseljenoMesto;
+    }
+
+ /*   @Override
     public String toString() {
         return "Drzava{" +
                 "id=" + id +
                 ", sifra_drzave='" + sifra_drzave + '\'' +
                 ", naziv=" + naziv +
                 '}';
-    }
+    }*/
 }

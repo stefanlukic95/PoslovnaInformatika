@@ -38,6 +38,7 @@ public class DrzavaServiceImpl implements DrzavaService {
         }
         drzavaUpdt.setSifra_drzave(drzava.getSifra_drzave());
         drzavaUpdt.setNaziv(drzava.getNaziv());
+        drzavaUpdt.setNaseljenoMesto(drzava.getNaseljenoMesto());
 
         Drzava updateDrzava = this.drzavaRepository.save(drzavaUpdt);
         return updateDrzava;
