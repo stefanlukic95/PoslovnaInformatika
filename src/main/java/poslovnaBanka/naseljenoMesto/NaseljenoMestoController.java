@@ -65,7 +65,7 @@ public class NaseljenoMestoController {
 
     @RequestMapping(
             method = RequestMethod.PUT,
-            value = "/naseljenamesta/{id}",
+            value = "/naseljenamesta/drzave/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -87,7 +87,7 @@ public class NaseljenoMestoController {
 
     @RequestMapping(
             method = RequestMethod.DELETE,
-            value = "/naseljenamesta/{id}"
+            value = "/naseljenamesta/drzave/{id}"
     )
     public ResponseEntity<NaseljenoMesto> deleteNaseljenoMesto(@PathVariable("id") long id){
         this.naseljenoMestoService.delete(id);
