@@ -1,5 +1,7 @@
 package poslovnaBanka.naseljenoMesto;
 
+import poslovnaBanka.drzava.Drzava;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,14 +15,20 @@ public class NaseljenoMesto {
     private String naziv;
     private String ptt_oznaka;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Drzava drzava;
+
+
     public NaseljenoMesto(){
 
     }
 
-    public NaseljenoMesto(int sifra_mesta, String naziv, String ptt_oznaka) {
+    public NaseljenoMesto(int sifra_mesta, String naziv, String ptt_oznaka, Drzava drzava) {
         this.sifra_mesta = sifra_mesta;
         this.naziv = naziv;
         this.ptt_oznaka = ptt_oznaka;
+        this.drzava = drzava;
+
     }
 
     public long getId() {
@@ -50,5 +58,13 @@ public class NaseljenoMesto {
 
     public void setPtt_oznaka(String ptt_oznaka) {
         this.ptt_oznaka = ptt_oznaka;
+    }
+
+    public Drzava getDrzava() {
+        return drzava;
+    }
+
+    public void setDrzava(Drzava drzava) {
+        this.drzava = drzava;
     }
 }

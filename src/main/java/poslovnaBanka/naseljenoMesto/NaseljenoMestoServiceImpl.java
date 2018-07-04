@@ -41,6 +41,7 @@ public class NaseljenoMestoServiceImpl implements NaseljenoMestoService{
         nasmUpdt.setSifra_mesta(nasm.getSifra_mesta());
         nasmUpdt.setNaziv(nasm.getNaziv());
         nasmUpdt.setPtt_oznaka(nasm.getPtt_oznaka());
+        nasmUpdt.setDrzava(nasm.getDrzava());
 
         NaseljenoMesto updateNasm = this.naseljenoMestoRepository.save(nasmUpdt);
         return updateNasm;
