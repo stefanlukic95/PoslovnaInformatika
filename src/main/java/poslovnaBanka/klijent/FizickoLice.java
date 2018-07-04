@@ -1,34 +1,84 @@
 package poslovnaBanka.klijent;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name ="FizickoLice")
-public class FizickoLice extends Klijent {
+public class FizickoLice {
 
-    private String br_licnek;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String naziv;
+    private String email;
+    private String adresa;
+    private String br_telefona;
+    private Date datum_registracije;
+    private String br_licne_karte;
 
-
-    public FizickoLice(){
+    public FizickoLice() {
 
     }
 
-    public FizickoLice(String br_licnek) {
-        this.br_licnek = br_licnek;
+    public FizickoLice(String naziv, String email, String adresa, String br_telefona, Date datum_registracije, String br_licne_karte) {
+        this.naziv = naziv;
+        this.email = email;
+        this.adresa = adresa;
+        this.br_telefona = br_telefona;
+        this.datum_registracije = datum_registracije;
+        this.br_licne_karte = br_licne_karte;
     }
 
-    public FizickoLice(String naziv, String email, String adresa, String br_telefona, Date datum_registracije, String br_licnek) {
-        super(naziv, email, adresa, br_telefona, datum_registracije);
-        this.br_licnek = br_licnek;
+    public long getId() {
+        return id;
     }
 
-    public String getBr_licnek() {
-        return br_licnek;
+    public String getNaziv() {
+        return naziv;
     }
 
-    public void setBr_licnek(String br_licnek) {
-        this.br_licnek = br_licnek;
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAdresa() {
+        return adresa;
+    }
+
+    public void setAdresa(String adresa) {
+        this.adresa = adresa;
+    }
+
+    public String getBr_telefona() {
+        return br_telefona;
+    }
+
+    public void setBr_telefona(String br_telefona) {
+        this.br_telefona = br_telefona;
+    }
+
+    public Date getDatum_registracije() {
+        return datum_registracije;
+    }
+
+    public void setDatum_registracije(Date datum_registracije) {
+        this.datum_registracije = datum_registracije;
+    }
+
+    public String getBr_licne_karte() {
+        return br_licne_karte;
+    }
+
+    public void setBr_licne_karte(String br_licne_karte) {
+        this.br_licne_karte = br_licne_karte;
     }
 }
