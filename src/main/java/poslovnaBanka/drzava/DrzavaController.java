@@ -21,6 +21,11 @@ public class DrzavaController {
     @Autowired
     private DrzavaService drzavaService;
 
+
+    @Autowired
+    private NaseljenoMestoService naseljenoMestoService;
+
+
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/drzave",
@@ -57,12 +62,17 @@ public class DrzavaController {
     public ResponseEntity<Drzava> insertDrzava(@RequestBody Drzava drzava) throws Exception{
         Drzava createdDrzava  = this.drzavaService.create(drzava);
 
+       /* NaseljenoMesto naseljenoMesto = naseljenoMestoService.findOne(id);
+
+        naseljenoMesto.setDrzava(createdDrzava);
+        naseljenoMestoService.update(naseljenoMesto);*/
+
         return new ResponseEntity<Drzava>(createdDrzava, HttpStatus.CREATED);
     }
 
     @RequestMapping(
             method = RequestMethod.PUT,
-            value = "/drzave/{id}",
+            value = "/drzave/naseljenamesta/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -84,7 +94,7 @@ public class DrzavaController {
 
     @RequestMapping(
             method = RequestMethod.DELETE,
-            value = "/drzave/{id}"
+            value = "/drzave/naseljenamesta/{id}"
     )
     public ResponseEntity<Drzava> deleteDrzava(@PathVariable("id") long id){
         this.drzavaService.delete(id);

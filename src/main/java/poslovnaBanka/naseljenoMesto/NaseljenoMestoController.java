@@ -50,22 +50,22 @@ public class NaseljenoMestoController {
 
     @RequestMapping(
             method = RequestMethod.POST,
-            value = "/naseljenamesta/drzave/{id}",
+            value = "/naseljenamesta",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<NaseljenoMesto> insertNaseljenoMesto(@RequestBody NaseljenoMesto naseljenoMesto, @PathVariable ("id") long id) throws Exception{
+    public ResponseEntity<NaseljenoMesto> insertNaseljenoMesto(@RequestBody NaseljenoMesto naseljenoMesto) throws Exception{
         NaseljenoMesto createdNasm  = this.naseljenoMestoService.create(naseljenoMesto);
+       // Drzava drzava = drzavaService.findOne(id);
 
-        Drzava drzava = drzavaService.findOne(id);
-        drzava.setNaseljenoMesto(createdNasm);
-        drzavaService.update(drzava);
+       // createdNasm.setDrzava(drzava);
+        naseljenoMestoService.update(createdNasm);
         return new ResponseEntity<NaseljenoMesto>(createdNasm, HttpStatus.CREATED);
     }
 
     @RequestMapping(
             method = RequestMethod.PUT,
-            value = "/naseljenamesta/drzave/{id}",
+            value = "/naseljenamesta/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -87,7 +87,7 @@ public class NaseljenoMestoController {
 
     @RequestMapping(
             method = RequestMethod.DELETE,
-            value = "/naseljenamesta/drzave/{id}"
+            value = "/naseljenamesta/{id}"
     )
     public ResponseEntity<NaseljenoMesto> deleteNaseljenoMesto(@PathVariable("id") long id){
         this.naseljenoMestoService.delete(id);
