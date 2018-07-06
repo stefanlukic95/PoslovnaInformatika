@@ -1,5 +1,11 @@
 package poslovnaBanka.klijent;
 
+import java.util.List;
+
 public interface FizickoLiceService {
-    FizickoLice addFizickoLice(FizickoLice fizickoLice);
+    FizickoLice add(FizickoLice fizickoLice);
+    List<FizickoLice> findAll();
+    FizickoLice update(FizickoLice fizickoLice);
+    FizickoLice findOne(Long id);
+    void delete(Long id);
 }
