@@ -56,8 +56,10 @@ public class NaseljenoMestoController {
     )
     public ResponseEntity<NaseljenoMesto> insertNaseljenoMesto(@RequestBody NaseljenoMesto naseljenoMesto) throws Exception{
         NaseljenoMesto createdNasm  = this.naseljenoMestoService.create(naseljenoMesto);
+       // Drzava drzava = drzavaService.findOne(id);
 
-
+       // createdNasm.setDrzava(drzava);
+        naseljenoMestoService.update(createdNasm);
         return new ResponseEntity<NaseljenoMesto>(createdNasm, HttpStatus.CREATED);
     }
 

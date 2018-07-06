@@ -26,6 +26,7 @@ public class NaseljenoMestoServiceImpl implements NaseljenoMestoService{
 
     @Override
     public NaseljenoMesto create(NaseljenoMesto nasm) {
+        
         NaseljenoMesto savedNasm = this.naseljenoMestoRepository.save(nasm);
         return savedNasm;
     }

@@ -31,6 +31,9 @@ public class Drzava {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getSifra_drzave() {
         return sifra_drzave;
