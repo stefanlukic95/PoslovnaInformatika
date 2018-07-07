@@ -31,20 +31,22 @@ public class RacuniLicaServiceImpl implements RacuniLicaService {
 
     @Override
     public RacuniLica update(RacuniLica racuniLica) throws Exception {
-        RacuniLica rac = racuniLicaRepository.findOne(racuniLica.getId());
+        RacuniLica rac = this.racuniLicaRepository.findOne(racuniLica.getId());
 
         if(rac == null){
             throw new Exception("NIJE NADJENO");
         }
 
-        rac.setBr_racuna(rac.getBr_racuna());
-        rac.setDatum_otvaranja(rac.getDatum_otvaranja());
-        rac.setVazeci(rac.isVazeci());
+        rac.setBr_racuna(racuniLica.getBr_racuna());
+        rac.setDatum_otvaranja(racuniLica.getDatum_otvaranja());
+
 
         RacuniLica racUpdt = this.racuniLicaRepository.save(rac);
 
         return racUpdt;
     }
+
+
 
     @Override
     public void delete(long id) {

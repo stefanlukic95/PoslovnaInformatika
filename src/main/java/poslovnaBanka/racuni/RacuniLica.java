@@ -1,5 +1,7 @@
 package poslovnaBanka.racuni;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,6 +13,7 @@ public class RacuniLica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String br_racuna;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date datum_otvaranja;
     private boolean vazeci;
 
