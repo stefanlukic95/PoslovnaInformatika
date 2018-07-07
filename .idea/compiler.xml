@@ -9,5 +9,8 @@
         <module name="PoslovnaBankaApi" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="PoslovnaBankaApi" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

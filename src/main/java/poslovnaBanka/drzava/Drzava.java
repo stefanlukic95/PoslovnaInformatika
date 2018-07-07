@@ -14,24 +14,26 @@ public class Drzava {
     private long id;
     private String sifra_drzave;
     private String naziv;
-    @ManyToOne
-    private NaseljenoMesto naseljenoMesto;
+
 
 
     public Drzava(){
 
     }
 
-    public Drzava(String sifra_drzave, String naziv, NaseljenoMesto naseljenoMesto) {
+    public Drzava(String sifra_drzave, String naziv) {
         this.sifra_drzave = sifra_drzave;
         this.naziv = naziv;
-        this.naseljenoMesto = naseljenoMesto;
+
     }
 
     public long getId() {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getSifra_drzave() {
         return sifra_drzave;
@@ -49,13 +51,6 @@ public class Drzava {
         this.naziv = naziv;
     }
 
-    public NaseljenoMesto getNaseljenoMesto() {
-        return naseljenoMesto;
-    }
-
-    public void setNaseljenoMesto(NaseljenoMesto naseljenoMesto) {
-        this.naseljenoMesto = naseljenoMesto;
-    }
 
  /*   @Override
     public String toString() {
