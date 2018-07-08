@@ -1,5 +1,7 @@
 package poslovnaBanka.klijent;
 
+import poslovnaBanka.racuni.RacuniLica;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -17,18 +19,22 @@ public class PravnoLice {
     private Date datum_registracije;
     private String pib;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    private RacuniLica racuniLica;
+
 
     public PravnoLice(){
 
     }
 
-    public PravnoLice(String naziv, String email, String adresa, String br_telefona, Date datum_registracije, String PIB) {
+    public PravnoLice(String naziv, String email, String adresa, String br_telefona, Date datum_registracije, String PIB, RacuniLica racun) {
         this.naziv = naziv;
         this.email = email;
         this.adresa = adresa;
         this.br_telefona = br_telefona;
         this.datum_registracije = datum_registracije;
         this.pib = PIB;
+        this.racuniLica = racun;
     }
 
     public long getId() {
