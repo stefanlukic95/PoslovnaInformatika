@@ -1,6 +1,7 @@
 package poslovnaBanka.racuni;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -10,37 +11,50 @@ public class DnevnoStanjeRacuna {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long br_racuna;
+
+    @NotNull
     private Date datum_prometa;
+
+    @NotNull
     private double prethodno_stanje;
-    private double promet_korist;
-    private double promet_teren;
+
+    @NotNull
+    private double promet_korist; // kome se salje
+
+    @NotNull
+    private double promet_teren; // ko salje
+
+    @NotNull
     private double novo_stanje;
+
+    @ManyToOne
+    private RacuniLica racuniLica;
 
 
     public DnevnoStanjeRacuna(){
 
     }
 
-    public DnevnoStanjeRacuna(long br_racuna, Date datum_prometa, double prethodno_stanje, double promet_korist, double promet_teren, double novo_stanje) {
-        this.br_racuna = br_racuna;
+    public DnevnoStanjeRacuna(Date datum_prometa, double prethodno_stanje, double promet_korist, double promet_teren, double novo_stanje, RacuniLica racuniLica) {
+
         this.datum_prometa = datum_prometa;
         this.prethodno_stanje = prethodno_stanje;
         this.promet_korist = promet_korist;
         this.promet_teren = promet_teren;
         this.novo_stanje = novo_stanje;
+        this.racuniLica = racuniLica;
+    }
+
+    public RacuniLica getRacuniLica() {
+        return racuniLica;
+    }
+
+    public void setRacuniLica(RacuniLica racuniLica) {
+        this.racuniLica = racuniLica;
     }
 
     public long getId() {
         return id;
-    }
-
-    public long getBr_racuna() {
-        return br_racuna;
-    }
-
-    public void setBr_racuna(long br_racuna) {
-        this.br_racuna = br_racuna;
     }
 
     public Date getDatum_prometa() {

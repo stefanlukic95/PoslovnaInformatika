@@ -1,5 +1,7 @@
 package poslovnaBanka.kurs;
 
+import poslovnaBanka.banka.Banka;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,15 +16,27 @@ public class KursnaLista {
     private String br_kursnel;
     private Date primena_od;
 
+    @ManyToOne
+    private Banka banka;
+
 
     public KursnaLista(){
 
     }
 
-    public KursnaLista(Date datum, String br_kursnel, Date primena_od) {
+    public KursnaLista(Date datum, String br_kursnel, Date primena_od, Banka banka) {
         this.datum = datum;
         this.br_kursnel = br_kursnel;
         this.primena_od = primena_od;
+        this.banka = banka;
+    }
+
+    public Banka getBanka() {
+        return banka;
+    }
+
+    public void setBanka(Banka banka) {
+        this.banka = banka;
     }
 
     public long getId() {

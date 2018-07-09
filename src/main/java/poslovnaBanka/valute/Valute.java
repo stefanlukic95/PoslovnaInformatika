@@ -1,5 +1,7 @@
 package poslovnaBanka.valute;
 
+import poslovnaBanka.drzava.Drzava;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,9 @@ public class Valute {
     private String sifra;
     private String naziv;
     private boolean domicilna;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Drzava drzava;
 
     public Valute(){
 

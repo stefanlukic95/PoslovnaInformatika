@@ -1,6 +1,7 @@
 package poslovnaBanka.klijent;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -10,11 +11,22 @@ public class FizickoLice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
     private String naziv;
+
+    @NotNull
     private String email;
+
+    @NotNull
     private String adresa;
+
+    @NotNull
     private String br_telefona;
+
     private Date datum_registracije;
+
+    @NotNull
     private String br_licne_karte;
 
     public FizickoLice() {

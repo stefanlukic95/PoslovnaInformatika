@@ -1,8 +1,11 @@
 package poslovnaBanka.racuni;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import poslovnaBanka.banka.Banka;
+import poslovnaBanka.valute.Valute;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 
@@ -13,25 +16,54 @@ public class RacuniLica {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
     private String br_racuna;
+
+
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date datum_otvaranja;
+
+
     private boolean vazeci;
+
+    @OneToOne
+    private Valute valute;
+
+    @ManyToOne
+    private Banka banka;
 
     public RacuniLica(){
 
     }
 
-    public RacuniLica(String br_racuna, Date datum_otvaranja, boolean vazeci) {
+    public RacuniLica(String br_racuna, Date datum_otvaranja, boolean vazeci, Valute valute, Banka banka) {
         this.br_racuna = br_racuna;
         this.datum_otvaranja = datum_otvaranja;
         this.vazeci = vazeci;
+        this.valute = valute;
+        this.banka = banka;
+    }
+
+    public Valute getValute() {
+        return valute;
+    }
+
+    public void setValute(Valute valute) {
+        this.valute = valute;
     }
 
     public long getId() {
         return id;
     }
 
+    public Banka getBanka() {
+        return banka;
+    }
+
+    public void setBanka(Banka banka) {
+        this.banka = banka;
+    }
 
     public String getBr_racuna() {
         return br_racuna;

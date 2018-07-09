@@ -3,6 +3,7 @@ package poslovnaBanka.klijent;
 import poslovnaBanka.racuni.RacuniLica;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -12,14 +13,25 @@ public class PravnoLice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
     private String naziv;
+
+    @NotNull
     private String email;
+
+    @NotNull
     private String adresa;
+
+    @NotNull
     private String br_telefona;
+
     private Date datum_registracije;
+
+    @NotNull
     private String pib;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     private RacuniLica racuniLica;
 
 

@@ -1,5 +1,7 @@
 package poslovnaBanka.racuni;
 
+import poslovnaBanka.analitikaIzvoda.AnalitikaIzvoda;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,14 +16,26 @@ public class Clearing {
     private double ukupan_iznos;
     private Date datum;
 
+    @ManyToOne
+    private AnalitikaIzvoda analitikaIzvoda;
+
     public Clearing(){
 
     }
 
-    public Clearing(String id_poruke, double ukupan_iznos, Date datum) {
+    public Clearing(String id_poruke, double ukupan_iznos, Date datum, AnalitikaIzvoda analitikaIzvoda) {
         this.id_poruke = id_poruke;
         this.ukupan_iznos = ukupan_iznos;
         this.datum = datum;
+        this.analitikaIzvoda = analitikaIzvoda;
+    }
+
+    public AnalitikaIzvoda getAnalitikaIzvoda() {
+        return analitikaIzvoda;
+    }
+
+    public void setAnalitikaIzvoda(AnalitikaIzvoda analitikaIzvoda) {
+        this.analitikaIzvoda = analitikaIzvoda;
     }
 
     public long getId() {

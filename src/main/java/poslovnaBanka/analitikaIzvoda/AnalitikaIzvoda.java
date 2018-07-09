@@ -1,6 +1,13 @@
 package poslovnaBanka.analitikaIzvoda;
 
+import poslovnaBanka.naseljenoMesto.NaseljenoMesto;
+import poslovnaBanka.racuni.DnevnoStanjeRacuna;
+import poslovnaBanka.racuni.RacuniLica;
+import poslovnaBanka.racuni.VrstePlacanja;
+import poslovnaBanka.valute.Valute;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 @Entity
 @Table(name = "AnalitikaIzvoda")
@@ -10,27 +17,61 @@ public class AnalitikaIzvoda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long br_stavke;
+    @NotNull
     private String duznik;
+
+    @NotNull
     private String svrha_placanja;
+
+    @NotNull
     private String poverilac_primalac;
+
+    @NotNull
     private Date datum_prijema;
+
+    @NotNull
     private Date datum_valute;
-    private String racun_duznika;
+
+    @ManyToOne
+    private RacuniLica racun_duznika;
+
     private int model_zaduzenja;
-    private String poziv_na_brZ;
-    private String racun_poverioca;
+
+    private String poziv_na_brZ; //zaduzenja
+
+    @ManyToOne
+    private String racun_poverioca; // racun banke
+
     private int model_odobrenja;
-    private String pozic_na_brO;
+
+    private String poziv_na_brO; //odobrenja
+
     private boolean hitno;
+
     private double iznos;
+
     private int tip_greske;
+
     private String status;
+
+    @ManyToOne
+    private Valute valuta;
+
+    @ManyToOne
+    private VrstePlacanja vrstaPlacanja;
+
+    @OneToOne
+    private DnevnoStanjeRacuna dnevnoStanjeRacuna;
+
+    @ManyToOne
+    private NaseljenoMesto naseljenoMesto;
+
 
     public AnalitikaIzvoda(){
 
     }
 
-    public AnalitikaIzvoda(long br_stavke, String duznik, String svrha_placanja, String poverilac_primalac, Date datum_prijema, Date datum_valute, String racun_duznika, int model_zaduzenja, String poziv_na_brZ, String racun_poverioca, int model_odobrenja, String pozic_na_brO, boolean hitno, double iznos, int tip_greske, String status) {
+    public AnalitikaIzvoda(long br_stavke, String duznik, String svrha_placanja, String poverilac_primalac, Date datum_prijema, Date datum_valute, RacuniLica racun_duznika, int model_zaduzenja, String poziv_na_brZ, String racun_poverioca, int model_odobrenja, String poziv_na_brO, boolean hitno, double iznos, int tip_greske, String status, Valute valuta, VrstePlacanja vrstaPlacanja, DnevnoStanjeRacuna dnevnoStanjeRacuna, NaseljenoMesto naseljenoMesto) {
         this.br_stavke = br_stavke;
         this.duznik = duznik;
         this.svrha_placanja = svrha_placanja;
@@ -42,11 +83,15 @@ public class AnalitikaIzvoda {
         this.poziv_na_brZ = poziv_na_brZ;
         this.racun_poverioca = racun_poverioca;
         this.model_odobrenja = model_odobrenja;
-        this.pozic_na_brO = pozic_na_brO;
+        this.poziv_na_brO = poziv_na_brO;
         this.hitno = hitno;
         this.iznos = iznos;
         this.tip_greske = tip_greske;
         this.status = status;
+        this.valuta = valuta;
+        this.vrstaPlacanja = vrstaPlacanja;
+        this.dnevnoStanjeRacuna = dnevnoStanjeRacuna;
+        this.naseljenoMesto = naseljenoMesto;
     }
 
     public long getId() {
@@ -60,6 +105,34 @@ public class AnalitikaIzvoda {
 
     public void setBr_stavke(long br_stavke) {
         this.br_stavke = br_stavke;
+    }
+
+    public void setModel_odobrenja(int model_odobrenja) {
+        this.model_odobrenja = model_odobrenja;
+    }
+
+    public VrstePlacanja getVrstaPlacanja() {
+        return vrstaPlacanja;
+    }
+
+    public void setVrstaPlacanja(VrstePlacanja vrstaPlacanja) {
+        this.vrstaPlacanja = vrstaPlacanja;
+    }
+
+    public DnevnoStanjeRacuna getDnevnoStanjeRacuna() {
+        return dnevnoStanjeRacuna;
+    }
+
+    public void setDnevnoStanjeRacuna(DnevnoStanjeRacuna dnevnoStanjeRacuna) {
+        this.dnevnoStanjeRacuna = dnevnoStanjeRacuna;
+    }
+
+    public NaseljenoMesto getNaseljenoMesto() {
+        return naseljenoMesto;
+    }
+
+    public void setNaseljenoMesto(NaseljenoMesto naseljenoMesto) {
+        this.naseljenoMesto = naseljenoMesto;
     }
 
     public String getDuznik() {
@@ -102,11 +175,11 @@ public class AnalitikaIzvoda {
         this.datum_valute = datum_valute;
     }
 
-    public String getRacun_duznika() {
+    public RacuniLica getRacun_duznika() {
         return racun_duznika;
     }
 
-    public void setRacun_duznika(String racun_duznika) {
+    public void setRacun_duznika(RacuniLica racun_duznika) {
         this.racun_duznika = racun_duznika;
     }
 
@@ -138,16 +211,8 @@ public class AnalitikaIzvoda {
         return model_odobrenja;
     }
 
-    public void setModel_odobrenja(int model_odobrenja) {
-        this.model_odobrenja = model_odobrenja;
-    }
-
-    public String getPozic_na_brO() {
-        return pozic_na_brO;
-    }
-
     public void setPozic_na_brO(String pozic_na_brO) {
-        this.pozic_na_brO = pozic_na_brO;
+        this.poziv_na_brO = pozic_na_brO;
     }
 
     public boolean isHitno() {
@@ -180,5 +245,21 @@ public class AnalitikaIzvoda {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getPoziv_na_brO() {
+        return poziv_na_brO;
+    }
+
+    public void setPoziv_na_brO(String poziv_na_brO) {
+        this.poziv_na_brO = poziv_na_brO;
+    }
+
+    public Valute getValuta() {
+        return valuta;
+    }
+
+    public void setValuta(Valute valuta) {
+        this.valuta = valuta;
     }
 }

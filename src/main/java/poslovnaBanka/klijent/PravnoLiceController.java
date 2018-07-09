@@ -20,7 +20,7 @@ public class PravnoLiceController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<PravnoLice> insertDrzava(@RequestBody PravnoLice pravnoLice) {
+    public ResponseEntity<PravnoLice> insertPravnoLice(@RequestBody PravnoLice pravnoLice) {
 
         PravnoLice pravnoLice1 = pravnoLiceService.add(pravnoLice);
         return new ResponseEntity<PravnoLice>(pravnoLice1, HttpStatus.CREATED);
