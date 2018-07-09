@@ -39,7 +39,7 @@ public class AnalitikaIzvoda {
 
     private String poziv_na_brZ; //zaduzenja
 
-    @ManyToOne
+
     private String racun_poverioca; // racun banke
 
     private int model_odobrenja;

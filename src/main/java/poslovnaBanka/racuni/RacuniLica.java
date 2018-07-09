@@ -2,6 +2,8 @@ package poslovnaBanka.racuni;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import poslovnaBanka.banka.Banka;
+import poslovnaBanka.klijent.FizickoLice;
+import poslovnaBanka.klijent.PravnoLice;
 import poslovnaBanka.valute.Valute;
 
 import javax.persistence.*;
@@ -33,6 +35,12 @@ public class RacuniLica {
     @ManyToOne
     private Banka banka;
 
+    @ManyToOne
+    private FizickoLice fizickoLice;
+
+    @ManyToOne
+    private PravnoLice pravnoLice;
+    
     public RacuniLica(){
 
     }

@@ -53,6 +53,7 @@ public class ValuteController {
     public ResponseEntity<Valute> insertValuta(@RequestBody Valute valute) throws Exception{
         Valute createdValuta  = this.valuteService.create(valute);
 
+        this.valuteService.update(createdValuta);
         return new ResponseEntity<Valute>(createdValuta, HttpStatus.CREATED);
     }
 

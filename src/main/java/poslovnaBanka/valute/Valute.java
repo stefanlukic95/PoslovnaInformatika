@@ -23,11 +23,12 @@ public class Valute {
 
     }
 
-    public Valute(int id_valute, String sifra, String naziv, boolean domicilna) {
+    public Valute(int id_valute, String sifra, String naziv, boolean domicilna, Drzava drzava) {
         this.id_valute = id_valute;
         this.sifra = sifra;
         this.naziv = naziv;
         this.domicilna = domicilna;
+        this.drzava = drzava;
     }
 
 
@@ -67,5 +68,13 @@ public class Valute {
 
     public void setDomicilna(boolean domicilna) {
         this.domicilna = domicilna;
+    }
+
+    public Drzava getDrzava() {
+        return drzava;
+    }
+
+    public void setDrzava(Drzava drzava) {
+        this.drzava = drzava;
     }
 }

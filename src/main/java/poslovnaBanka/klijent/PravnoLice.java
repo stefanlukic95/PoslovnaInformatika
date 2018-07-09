@@ -31,22 +31,21 @@ public class PravnoLice {
     @NotNull
     private String pib;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private RacuniLica racuniLica;
+
 
 
     public PravnoLice(){
 
     }
 
-    public PravnoLice(String naziv, String email, String adresa, String br_telefona, Date datum_registracije, String PIB, RacuniLica racun) {
+    public PravnoLice(String naziv, String email, String adresa, String br_telefona, Date datum_registracije, String PIB) {
         this.naziv = naziv;
         this.email = email;
         this.adresa = adresa;
         this.br_telefona = br_telefona;
         this.datum_registracije = datum_registracije;
         this.pib = PIB;
-        this.racuniLica = racun;
+
     }
 
     public long getId() {

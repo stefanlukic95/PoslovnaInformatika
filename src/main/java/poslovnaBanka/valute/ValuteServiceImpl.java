@@ -43,6 +43,7 @@ public class ValuteServiceImpl implements ValuteService {
         valUpdt.setNaziv(val.getNaziv());
         valUpdt.setSifra(val.getSifra());
         valUpdt.setDomicilna(val.isDomicilna());
+        valUpdt.setDrzava(val.getDrzava());
 
         Valute updateVal = this.valuteRepository.save(valUpdt);
         return updateVal;
