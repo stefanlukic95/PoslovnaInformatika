@@ -10,6 +10,10 @@ import poslovnaBanka.klijent.FizickoLice;
 import poslovnaBanka.klijent.FizickoLiceRepository;
 import poslovnaBanka.klijent.PravnoLice;
 import poslovnaBanka.klijent.PravnoLiceRepository;
+import poslovnaBanka.kurs.KursValuti;
+import poslovnaBanka.kurs.KursValutiRepository;
+import poslovnaBanka.kurs.KursnaLista;
+import poslovnaBanka.kurs.KursnaListaRepository;
 import poslovnaBanka.naseljenoMesto.NaseljenoMesto;
 import poslovnaBanka.naseljenoMesto.NaseljenoMestoRepository;
 import poslovnaBanka.racuni.RacuniLica;
@@ -47,6 +51,11 @@ public class TestData {
     @Autowired
     private BankaRepository bankaRepository;
 
+    @Autowired
+    private KursnaListaRepository kursnaListaRepository;
+
+    @Autowired
+    private KursValutiRepository kursValutiRepository;
 
     @PostConstruct
     public void podaci(){
@@ -87,11 +96,13 @@ public class TestData {
         //KLIJENTI
         String datum1 = "2017-05-04";
         String datum2 = "2018-03-03";
+        String datum3 = "2016-03-02";
         DateFormat format = new SimpleDateFormat("YYYY-MM-DD");
 
         try {
             Date date = format.parse(datum1);
             Date date2 = format.parse(datum2);
+            Date date3 = format.parse(datum3);
 
             FizickoLice fizl = new FizickoLice("Pera Peric", "pera@gmail.com","Ulica dobra jako 12","021-876-878",date,"0870069659");
             fizickoLiceRepository.save(fizl);
@@ -107,9 +118,21 @@ public class TestData {
             //RACUNI
             RacuniLica racun1 =  new RacuniLica("0327832-43432-43",date2,true,valuta1,banka);
             racuniLicaRepository.save(racun1);
-
             RacuniLica racun2 =  new RacuniLica("765432-768682-9797",date,true,valuta2,banka);
             racuniLicaRepository.save(racun2);
+
+            //KURSNA LISTA
+            KursnaLista kursl1 =  new KursnaLista(date3,"1234",date2,banka);
+            kursnaListaRepository.save(kursl1);
+            KursnaLista kursl2 =  new KursnaLista(date,"0098",date2,banka);
+            kursnaListaRepository.save(kursl2);
+
+
+            //KURS VALUTI
+            KursValuti kursValuti1 =  new KursValuti(1,120,119,118,kursl2,valuta3);
+            kursValutiRepository.save(kursValuti1);
+            KursValuti kursValuti2 =  new KursValuti(2,123,121,117,kursl1,valuta1);
+            kursValutiRepository.save(kursValuti2);
 
         } catch (ParseException e) {
             e.printStackTrace();
