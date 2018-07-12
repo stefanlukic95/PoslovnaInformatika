@@ -16,8 +16,7 @@ import poslovnaBanka.kurs.KursnaLista;
 import poslovnaBanka.kurs.KursnaListaRepository;
 import poslovnaBanka.naseljenoMesto.NaseljenoMesto;
 import poslovnaBanka.naseljenoMesto.NaseljenoMestoRepository;
-import poslovnaBanka.racuni.RacuniLica;
-import poslovnaBanka.racuni.RacuniLicaRepository;
+import poslovnaBanka.racuni.*;
 import poslovnaBanka.valute.Valute;
 import poslovnaBanka.valute.ValuteRepository;
 
@@ -57,6 +56,14 @@ public class TestData {
     @Autowired
     private KursValutiRepository kursValutiRepository;
 
+
+    @Autowired
+    private VrstePlacanjaRepository vrstePlacanjaRepository;
+
+    @Autowired
+    private DnevnoStanjeRacunaRepository dnevnoStanjeRacunaRepository;
+
+
     @PostConstruct
     public void podaci(){
 
@@ -92,6 +99,8 @@ public class TestData {
         //BANKA
         Banka banka = new Banka("234234","4325","Banka intesa","Ulica 1","banka@gmail.com","web1","021-42343-5345","011-324-4324",true,"34244234","64364-754754-8434763");
         bankaRepository.save(banka);
+        Banka banka2 = new Banka("0009894234","9356655","Erste banka","Ulica 2","banka2@gmail.com","web1","021-09043-5095","011-8784-1010",true,"786364378","12321-546467-090989");
+        bankaRepository.save(banka2);
 
         //KLIJENTI
         String datum1 = "2017-05-04";
@@ -134,9 +143,22 @@ public class TestData {
             KursValuti kursValuti2 =  new KursValuti(2,123,121,117,kursl1,valuta1);
             kursValutiRepository.save(kursValuti2);
 
+            //DNEVNO STANJE RACUNA
+            DnevnoStanjeRacuna dnevnoStanjeRacuna1 = new DnevnoStanjeRacuna(date2,123.2,130.1,140.4,137.5,racun2);
+            dnevnoStanjeRacunaRepository.save(dnevnoStanjeRacuna1);
+            DnevnoStanjeRacuna dnevnoStanjeRacuna2 = new DnevnoStanjeRacuna(date,183.2,190.1,1140.4,237.5,racun1);
+            dnevnoStanjeRacunaRepository.save(dnevnoStanjeRacuna2);
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+
+            //VRSTE PLACANJA
+            VrstePlacanja vrstePlacanja1 =  new VrstePlacanja(123  ,"naziv1");
+            vrstePlacanjaRepository.save(vrstePlacanja1);
+            VrstePlacanja vrstePlacanja2 =  new VrstePlacanja(124  ,"naziv2");
+            vrstePlacanjaRepository.save(vrstePlacanja2);
 
 
 
