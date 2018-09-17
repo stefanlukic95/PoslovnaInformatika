@@ -46,12 +46,24 @@ public class RacunLicaController {
 
     @RequestMapping(
             method = RequestMethod.POST,
-            value = "/racuni",
+            value = "/racuni/klijentFizicko/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<RacuniLica> insertDrzava(@RequestBody RacuniLica racun) throws Exception{
-        RacuniLica racuniLica  = this.racuniLicaService.create(racun);
+    public ResponseEntity<RacuniLica> insertRacunFizicko(@RequestBody RacuniLica racun, @PathVariable("id") long id) throws Exception{
+        RacuniLica racuniLica  = this.racuniLicaService.createRacunFizicko(racun, id);
+
+        return new ResponseEntity<RacuniLica>(racuniLica, HttpStatus.CREATED);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.POST,
+            value = "/racuni/klijentPravno/{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<RacuniLica> insertRacunPravno(@RequestBody RacuniLica racun, @PathVariable("id") long id) throws Exception{
+        RacuniLica racuniLica  = this.racuniLicaService.createRacunPravno(racun, id);
 
         return new ResponseEntity<RacuniLica>(racuniLica, HttpStatus.CREATED);
     }

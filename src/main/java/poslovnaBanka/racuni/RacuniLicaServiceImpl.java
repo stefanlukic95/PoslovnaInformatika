@@ -4,6 +4,10 @@ package poslovnaBanka.racuni;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import poslovnaBanka.klijent.FizickoLice;
+import poslovnaBanka.klijent.FizickoLiceService;
+import poslovnaBanka.klijent.PravnoLice;
+import poslovnaBanka.klijent.PravnoLiceService;
 
 import java.util.List;
 
@@ -13,6 +17,12 @@ public class RacuniLicaServiceImpl implements RacuniLicaService {
 
     @Autowired
     private RacuniLicaRepository racuniLicaRepository;
+
+    @Autowired
+    private FizickoLiceService fizickoLiceService;
+
+    @Autowired
+    private PravnoLiceService pravnoLiceService;
 
     @Override
     public List<RacuniLica> findAll() {
@@ -25,10 +35,21 @@ public class RacuniLicaServiceImpl implements RacuniLicaService {
     }
 
     @Override
-    public RacuniLica create(RacuniLica racuniLica) {
-        RacuniLica rac = this.racuniLicaRepository.save(racuniLica);
-        return rac;
+    public RacuniLica createRacunPravno(RacuniLica racuniLica, long id) {
+        PravnoLice pravnoLice = pravnoLiceService.findOne(id);
+        racuniLica.setPravnoLice(pravnoLice);
+        RacuniLica racun = racuniLicaRepository.save(racuniLica);
+        return racun;
     }
+
+    @Override
+    public RacuniLica createRacunFizicko(RacuniLica racuniLica, long id) {
+        FizickoLice fizickoLice = fizickoLiceService.findOne(id);
+        racuniLica.setFizickoLice(fizickoLice);
+        RacuniLica racun = racuniLicaRepository.save(racuniLica);
+        return racun;
+    }
+
 
     @Override
     public RacuniLica update(RacuniLica racuniLica) throws Exception {

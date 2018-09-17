@@ -96,5 +96,21 @@ public class RacuniLica {
     public void setVazeci(boolean vazeci) {
         this.vazeci = vazeci;
     }
+
+    public FizickoLice getFizickoLice() {
+        return fizickoLice;
+    }
+
+    public void setFizickoLice(FizickoLice fizickoLice) {
+        this.fizickoLice = fizickoLice;
+    }
+
+    public PravnoLice getPravnoLice() {
+        return pravnoLice;
+    }
+
+    public void setPravnoLice(PravnoLice pravnoLice) {
+        this.pravnoLice = pravnoLice;
+    }
 }
 
