@@ -4,6 +4,8 @@ package poslovnaBanka.racuni;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import poslovnaBanka.banka.Banka;
+import poslovnaBanka.banka.BankaService;
 import poslovnaBanka.klijent.FizickoLice;
 import poslovnaBanka.klijent.FizickoLiceService;
 import poslovnaBanka.klijent.PravnoLice;
@@ -24,6 +26,9 @@ public class RacuniLicaServiceImpl implements RacuniLicaService {
     @Autowired
     private PravnoLiceService pravnoLiceService;
 
+    @Autowired
+    private BankaService bankaService;
+
     @Override
     public List<RacuniLica> findAll() {
         return racuniLicaRepository.findAll();
@@ -36,6 +41,8 @@ public class RacuniLicaServiceImpl implements RacuniLicaService {
 
     @Override
     public RacuniLica createRacunPravno(RacuniLica racuniLica, long id) {
+        Banka banka = bankaService.getBanka();
+        racuniLica.setBanka(banka);
         PravnoLice pravnoLice = pravnoLiceService.findOne(id);
         racuniLica.setPravnoLice(pravnoLice);
         RacuniLica racun = racuniLicaRepository.save(racuniLica);
@@ -44,6 +51,8 @@ public class RacuniLicaServiceImpl implements RacuniLicaService {
 
     @Override
     public RacuniLica createRacunFizicko(RacuniLica racuniLica, long id) {
+        Banka banka = bankaService.getBanka();
+        racuniLica.setBanka(banka);
         FizickoLice fizickoLice = fizickoLiceService.findOne(id);
         racuniLica.setFizickoLice(fizickoLice);
         RacuniLica racun = racuniLicaRepository.save(racuniLica);
