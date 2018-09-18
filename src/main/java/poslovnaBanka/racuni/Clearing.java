@@ -4,6 +4,7 @@ import poslovnaBanka.analitikaIzvoda.AnalitikaIzvoda;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Clearing")
@@ -16,32 +17,30 @@ public class Clearing {
     private double ukupan_iznos;
     private Date datum;
 
-    @ManyToOne
-    private AnalitikaIzvoda analitikaIzvoda;
+    @OneToMany
+    private List<AnalitikaIzvoda> pojedinacnoPlacanje;
 
     public Clearing(){
-
+        this.ukupan_iznos = 0;
     }
 
-    public Clearing(String id_poruke, double ukupan_iznos, Date datum, AnalitikaIzvoda analitikaIzvoda) {
+    public Clearing(String id_poruke, double ukupan_iznos, Date datum) {
         this.id_poruke = id_poruke;
         this.ukupan_iznos = ukupan_iznos;
         this.datum = datum;
-        this.analitikaIzvoda = analitikaIzvoda;
-    }
-
-    public AnalitikaIzvoda getAnalitikaIzvoda() {
-        return analitikaIzvoda;
-    }
-
-    public void setAnalitikaIzvoda(AnalitikaIzvoda analitikaIzvoda) {
-        this.analitikaIzvoda = analitikaIzvoda;
     }
 
     public long getId() {
         return id;
     }
 
+    public List<AnalitikaIzvoda> getPojedinacnoPlacanje() {
+        return pojedinacnoPlacanje;
+    }
+
+    public void setPojedinacnoPlacanje(List<AnalitikaIzvoda> pojedinacnoPlacanje) {
+        this.pojedinacnoPlacanje = pojedinacnoPlacanje;
+    }
 
     public String getId_poruke() {
         return id_poruke;

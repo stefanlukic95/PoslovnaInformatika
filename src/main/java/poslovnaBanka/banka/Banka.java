@@ -1,5 +1,7 @@
 package poslovnaBanka.banka;
 
+import poslovnaBanka.racuni.Clearing;
+
 import javax.persistence.*;
 
 @Entity
@@ -21,6 +23,9 @@ public class Banka {
     private String swift_kod;
     private String obracunski_racun;
 
+    @OneToOne
+    private Clearing aktivanClearing;
+
     public Banka(){
 
     }
@@ -37,6 +42,14 @@ public class Banka {
         this.banka = banka;
         this.swift_kod = swift_kod;
         this.obracunski_racun = obracunski_racun;
+    }
+
+    public Clearing getAktivanClearing() {
+        return aktivanClearing;
+    }
+
+    public void setAktivanClearing(Clearing aktivanClearing) {
+        this.aktivanClearing = aktivanClearing;
     }
 
     public long getId() {

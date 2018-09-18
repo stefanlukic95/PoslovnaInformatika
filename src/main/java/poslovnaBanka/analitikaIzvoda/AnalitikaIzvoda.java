@@ -1,6 +1,7 @@
 package poslovnaBanka.analitikaIzvoda;
 
 import poslovnaBanka.naseljenoMesto.NaseljenoMesto;
+import poslovnaBanka.racuni.Clearing;
 import poslovnaBanka.racuni.DnevnoStanjeRacuna;
 import poslovnaBanka.racuni.RacuniLica;
 import poslovnaBanka.racuni.VrstePlacanja;
@@ -17,6 +18,7 @@ public class AnalitikaIzvoda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long br_stavke;
+
     @NotNull
     private String duznik;
 
@@ -38,7 +40,6 @@ public class AnalitikaIzvoda {
     private int model_zaduzenja;
 
     private String poziv_na_brZ; //zaduzenja
-
 
     private String racun_poverioca; // racun banke
 
@@ -97,7 +98,6 @@ public class AnalitikaIzvoda {
     public long getId() {
         return id;
     }
-
 
     public long getBr_stavke() {
         return br_stavke;

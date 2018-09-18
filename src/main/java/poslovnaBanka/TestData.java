@@ -2,6 +2,8 @@ package poslovnaBanka;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import poslovnaBanka.analitikaIzvoda.AnalitikaIzvoda;
+import poslovnaBanka.analitikaIzvoda.AnalitikaIzvodaService;
 import poslovnaBanka.banka.Banka;
 import poslovnaBanka.banka.BankaRepository;
 import poslovnaBanka.drzava.Drzava;
@@ -21,10 +23,13 @@ import poslovnaBanka.valute.Valute;
 import poslovnaBanka.valute.ValuteRepository;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class TestData {
@@ -63,9 +68,21 @@ public class TestData {
     @Autowired
     private DnevnoStanjeRacunaRepository dnevnoStanjeRacunaRepository;
 
+    @Autowired
+    private ClearingRepository clearingRepository;
+
+    @Autowired
+    private RTGSService rtgsService;
+
+    @Autowired
+    private AnalitikaIzvodaService analitikaIzvodaService;
+
+    @Autowired
+    private ClearingService clearingService;
+
 
     @PostConstruct
-    public void podaci(){
+    public void podaci() throws IOException {
 
         //DRZAVE
         Drzava drzava1 = new Drzava("SRB","Srbija");
@@ -98,15 +115,48 @@ public class TestData {
 
         //BANKA
         Banka banka = new Banka("234234","4325","Banka intesa","Ulica 1","banka@gmail.com","web1","021-42343-5345","011-324-4324",true,"34244234","64364-754754-8434763");
+        Clearing clearing = new Clearing();
+        clearingRepository.save(clearing);
+        banka.setAktivanClearing(clearing);
         bankaRepository.save(banka);
         Banka banka2 = new Banka("0009894234","9356655","Erste banka","Ulica 2","banka2@gmail.com","web1","021-09043-5095","011-8784-1010",true,"786364378","12321-546467-090989");
         bankaRepository.save(banka2);
+        Clearing clearing2 = new Clearing();
+        clearingRepository.save(clearing2);
 
         //KLIJENTI
         String datum1 = "2017-05-04";
         String datum2 = "2018-03-03";
         String datum3 = "2016-03-02";
         DateFormat format = new SimpleDateFormat("YYYY-MM-DD");
+
+        AnalitikaIzvoda analitikaIzvoda = new AnalitikaIzvoda();
+        analitikaIzvoda.setBr_stavke(123);
+        analitikaIzvoda.setDatum_prijema(new Date());
+        analitikaIzvoda.setDuznik("duznik");
+        analitikaIzvoda.setSvrha_placanja("svrha");
+        analitikaIzvoda.setPoverilac_primalac("poverilac");
+        analitikaIzvoda.setDatum_valute(new Date());
+        analitikaIzvoda.setIznos(500);
+        AnalitikaIzvoda analitika = analitikaIzvodaService.create(analitikaIzvoda);
+        AnalitikaIzvoda analitikaIzvoda1 = new AnalitikaIzvoda();
+        analitikaIzvoda1.setBr_stavke(12);
+        analitikaIzvoda1.setDatum_prijema(new Date());
+        analitikaIzvoda1.setDuznik("duznik");
+        analitikaIzvoda1.setSvrha_placanja("svrha");
+        analitikaIzvoda1.setPoverilac_primalac("poverilac");
+        analitikaIzvoda1.setDatum_valute(new Date());
+        analitikaIzvoda1.setIznos(800);
+        AnalitikaIzvoda analitika1 = analitikaIzvodaService.create(analitikaIzvoda);
+        RTGS rtgs = rtgsService.createRTGS(analitika);
+        rtgsService.exportRTGS(rtgs);
+
+        List<AnalitikaIzvoda> analitike = new ArrayList<AnalitikaIzvoda>();
+        analitike.add(analitikaIzvoda);
+        analitike.add(analitikaIzvoda1);
+        clearing.setPojedinacnoPlacanje(analitike);
+        clearingService.exportClearing(clearing);
+
 
         try {
             Date date = format.parse(datum1);

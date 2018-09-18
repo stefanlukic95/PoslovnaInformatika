@@ -6,6 +6,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import poslovnaBanka.banka.BankaService;
+import poslovnaBanka.racuni.Clearing;
+import poslovnaBanka.racuni.ClearingService;
+import poslovnaBanka.racuni.RTGSService;
 
 import java.util.List;
 
@@ -16,6 +20,15 @@ public class AnalitikaIzvodaController {
 
     @Autowired
     private AnalitikaIzvodaService analitikaIzvodaService;
+
+    @Autowired
+    private ClearingService clearingService;
+
+    @Autowired
+    private RTGSService rtgsService;
+
+    @Autowired
+    private BankaService bankaService;
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -33,7 +46,19 @@ public class AnalitikaIzvodaController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<AnalitikaIzvoda> createAnalitika(@RequestBody AnalitikaIzvoda analitikaIzvoda) {
-        return new ResponseEntity<AnalitikaIzvoda>(analitikaIzvodaService.create(analitikaIzvoda), HttpStatus.OK);
+        AnalitikaIzvoda analitika = analitikaIzvodaService.create(analitikaIzvoda);
+        if(analitika.getIznos() >= 250000 || analitika.isHitno()) {
+            rtgsService.createRTGS(analitika);
+        } else {
+            Clearing clearing = bankaService.getBanka().getAktivanClearing();
+            clearing.setUkupan_iznos(clearing.getUkupan_iznos() + analitika.getIznos());
+            List<AnalitikaIzvoda> analitike = clearing.getPojedinacnoPlacanje();
+            analitike.add(analitika);
+            clearing.setPojedinacnoPlacanje(analitike);
+            clearingService.save(clearing);
+        }
+
+        return new ResponseEntity<AnalitikaIzvoda>(analitika, HttpStatus.OK);
     }
 
     @PostMapping(value="/analitikaFile")
