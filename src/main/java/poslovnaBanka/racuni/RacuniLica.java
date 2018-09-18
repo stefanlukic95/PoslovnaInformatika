@@ -22,10 +22,8 @@ public class RacuniLica {
     @NotNull
     private String br_racuna;
 
-
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date datum_otvaranja;
-
 
     private boolean vazeci;
 

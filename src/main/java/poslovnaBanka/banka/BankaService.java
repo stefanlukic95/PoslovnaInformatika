@@ -7,4 +7,5 @@ public interface BankaService {
     Banka getBanka();
     List<Banka> findAll();
     Banka findOne(long id);
+    Banka save(Banka banka);
 }

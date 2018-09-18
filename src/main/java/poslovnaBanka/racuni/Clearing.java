@@ -3,6 +3,9 @@ package poslovnaBanka.racuni;
 import poslovnaBanka.analitikaIzvoda.AnalitikaIzvoda;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,12 +25,14 @@ public class Clearing {
 
     public Clearing(){
         this.ukupan_iznos = 0;
+        this.pojedinacnoPlacanje = new ArrayList<AnalitikaIzvoda>();
     }
 
     public Clearing(String id_poruke, double ukupan_iznos, Date datum) {
         this.id_poruke = id_poruke;
         this.ukupan_iznos = ukupan_iznos;
         this.datum = datum;
+        this.pojedinacnoPlacanje = new ArrayList<AnalitikaIzvoda>();
     }
 
     public long getId() {

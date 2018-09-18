@@ -155,6 +155,7 @@ public class TestData {
         analitike.add(analitikaIzvoda);
         analitike.add(analitikaIzvoda1);
         clearing.setPojedinacnoPlacanje(analitike);
+        clearing.setDatum(new Date());
         clearingService.exportClearing(clearing);
 
 
