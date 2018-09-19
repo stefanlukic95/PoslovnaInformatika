@@ -1,40 +1,31 @@
-package poslovnaBanka.analitikaIzvoda;
+package poslovnaBanka.ModelXml;
 
+import poslovnaBanka.analitikaIzvoda.AnalitikaIzvoda;
 import poslovnaBanka.naseljenoMesto.NaseljenoMesto;
-import poslovnaBanka.racuni.Clearing;
 import poslovnaBanka.racuni.DnevnoStanjeRacuna;
 import poslovnaBanka.racuni.RacuniLica;
 import poslovnaBanka.racuni.VrstePlacanja;
 import poslovnaBanka.valute.Valute;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
-@Entity
-@Table(name = "AnalitikaIzvoda")
-public class AnalitikaIzvoda {
+import java.text.SimpleDateFormat;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+public class AnalitikaXml {
+
     private long id;
+
     private long br_stavke;
 
-    @NotNull
     private String duznik;
 
-    @NotNull
     private String svrha_placanja;
 
-    @NotNull
     private String poverilac_primalac;
 
-    @NotNull
-    private Date datum_prijema;
+    private String datum_prijema;
 
-    @NotNull
-    private Date datum_valute;
+    private String datum_valute;
 
-    @ManyToOne
     private RacuniLica racun_duznika;
 
     private int model_zaduzenja;
@@ -55,48 +46,45 @@ public class AnalitikaIzvoda {
 
     private String status;
 
-    @ManyToOne
     private Valute valuta;
 
-    @ManyToOne
     private VrstePlacanja vrstaPlacanja;
 
-    @OneToOne
     private DnevnoStanjeRacuna dnevnoStanjeRacuna;
 
-    @ManyToOne
     private NaseljenoMesto naseljenoMesto;
 
-
-    public AnalitikaIzvoda(){
-
-    }
-
-    public AnalitikaIzvoda(long br_stavke, String duznik, String svrha_placanja, String poverilac_primalac, Date datum_prijema, Date datum_valute, RacuniLica racun_duznika, int model_zaduzenja, String poziv_na_brZ, String racun_poverioca, int model_odobrenja, String poziv_na_brO, boolean hitno, double iznos, int tip_greske, String status, Valute valuta, VrstePlacanja vrstaPlacanja, DnevnoStanjeRacuna dnevnoStanjeRacuna, NaseljenoMesto naseljenoMesto) {
-        this.br_stavke = br_stavke;
-        this.duznik = duznik;
-        this.svrha_placanja = svrha_placanja;
-        this.poverilac_primalac = poverilac_primalac;
-        this.datum_prijema = datum_prijema;
-        this.datum_valute = datum_valute;
-        this.racun_duznika = racun_duznika;
-        this.model_zaduzenja = model_zaduzenja;
-        this.poziv_na_brZ = poziv_na_brZ;
-        this.racun_poverioca = racun_poverioca;
-        this.model_odobrenja = model_odobrenja;
-        this.poziv_na_brO = poziv_na_brO;
-        this.hitno = hitno;
-        this.iznos = iznos;
-        this.tip_greske = tip_greske;
-        this.status = status;
-        this.valuta = valuta;
-        this.vrstaPlacanja = vrstaPlacanja;
-        this.dnevnoStanjeRacuna = dnevnoStanjeRacuna;
-        this.naseljenoMesto = naseljenoMesto;
+    public AnalitikaXml(AnalitikaIzvoda analitikaIzvoda) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        this.id = analitikaIzvoda.getId();
+        this.br_stavke = analitikaIzvoda.getBr_stavke();
+        this.datum_prijema = format.format(analitikaIzvoda.getDatum_prijema());
+        this.datum_valute = format.format(analitikaIzvoda.getDatum_valute());
+        this.dnevnoStanjeRacuna = analitikaIzvoda.getDnevnoStanjeRacuna();
+        this.duznik = analitikaIzvoda.getDuznik();
+        this.hitno = analitikaIzvoda.isHitno();
+        this.iznos = analitikaIzvoda.getIznos();
+        this.model_odobrenja = analitikaIzvoda.getModel_odobrenja();
+        this.model_zaduzenja = analitikaIzvoda.getModel_zaduzenja();
+        this.naseljenoMesto = analitikaIzvoda.getNaseljenoMesto();
+        this.poverilac_primalac = analitikaIzvoda.getPoverilac_primalac();
+        this.poziv_na_brO = analitikaIzvoda.getPoziv_na_brO();
+        this.poziv_na_brZ = analitikaIzvoda.getPoziv_na_brZ();
+        this.racun_duznika = analitikaIzvoda.getRacun_duznika();
+        this.racun_poverioca = analitikaIzvoda.getRacun_poverioca();
+        this.status = analitikaIzvoda.getStatus();
+        this.svrha_placanja = analitikaIzvoda.getSvrha_placanja();
+        this.tip_greske = analitikaIzvoda.getTip_greske();
+        this.vrstaPlacanja = analitikaIzvoda.getVrstaPlacanja();
+        this.valuta = analitikaIzvoda.getValuta();
     }
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getBr_stavke() {
@@ -105,34 +93,6 @@ public class AnalitikaIzvoda {
 
     public void setBr_stavke(long br_stavke) {
         this.br_stavke = br_stavke;
-    }
-
-    public void setModel_odobrenja(int model_odobrenja) {
-        this.model_odobrenja = model_odobrenja;
-    }
-
-    public VrstePlacanja getVrstaPlacanja() {
-        return vrstaPlacanja;
-    }
-
-    public void setVrstaPlacanja(VrstePlacanja vrstaPlacanja) {
-        this.vrstaPlacanja = vrstaPlacanja;
-    }
-
-    public DnevnoStanjeRacuna getDnevnoStanjeRacuna() {
-        return dnevnoStanjeRacuna;
-    }
-
-    public void setDnevnoStanjeRacuna(DnevnoStanjeRacuna dnevnoStanjeRacuna) {
-        this.dnevnoStanjeRacuna = dnevnoStanjeRacuna;
-    }
-
-    public NaseljenoMesto getNaseljenoMesto() {
-        return naseljenoMesto;
-    }
-
-    public void setNaseljenoMesto(NaseljenoMesto naseljenoMesto) {
-        this.naseljenoMesto = naseljenoMesto;
     }
 
     public String getDuznik() {
@@ -159,19 +119,19 @@ public class AnalitikaIzvoda {
         this.poverilac_primalac = poverilac_primalac;
     }
 
-    public Date getDatum_prijema() {
+    public String getDatum_prijema() {
         return datum_prijema;
     }
 
-    public void setDatum_prijema(Date datum_prijema) {
+    public void setDatum_prijema(String datum_prijema) {
         this.datum_prijema = datum_prijema;
     }
 
-    public Date getDatum_valute() {
+    public String getDatum_valute() {
         return datum_valute;
     }
 
-    public void setDatum_valute(Date datum_valute) {
+    public void setDatum_valute(String datum_valute) {
         this.datum_valute = datum_valute;
     }
 
@@ -211,8 +171,16 @@ public class AnalitikaIzvoda {
         return model_odobrenja;
     }
 
-    public void setPozic_na_brO(String pozic_na_brO) {
-        this.poziv_na_brO = pozic_na_brO;
+    public void setModel_odobrenja(int model_odobrenja) {
+        this.model_odobrenja = model_odobrenja;
+    }
+
+    public String getPoziv_na_brO() {
+        return poziv_na_brO;
+    }
+
+    public void setPoziv_na_brO(String poziv_na_brO) {
+        this.poziv_na_brO = poziv_na_brO;
     }
 
     public boolean isHitno() {
@@ -247,19 +215,35 @@ public class AnalitikaIzvoda {
         this.status = status;
     }
 
-    public String getPoziv_na_brO() {
-        return poziv_na_brO;
-    }
-
-    public void setPoziv_na_brO(String poziv_na_brO) {
-        this.poziv_na_brO = poziv_na_brO;
-    }
-
     public Valute getValuta() {
         return valuta;
     }
 
     public void setValuta(Valute valuta) {
         this.valuta = valuta;
+    }
+
+    public VrstePlacanja getVrstaPlacanja() {
+        return vrstaPlacanja;
+    }
+
+    public void setVrstaPlacanja(VrstePlacanja vrstaPlacanja) {
+        this.vrstaPlacanja = vrstaPlacanja;
+    }
+
+    public DnevnoStanjeRacuna getDnevnoStanjeRacuna() {
+        return dnevnoStanjeRacuna;
+    }
+
+    public void setDnevnoStanjeRacuna(DnevnoStanjeRacuna dnevnoStanjeRacuna) {
+        this.dnevnoStanjeRacuna = dnevnoStanjeRacuna;
+    }
+
+    public NaseljenoMesto getNaseljenoMesto() {
+        return naseljenoMesto;
+    }
+
+    public void setNaseljenoMesto(NaseljenoMesto naseljenoMesto) {
+        this.naseljenoMesto = naseljenoMesto;
     }
 }

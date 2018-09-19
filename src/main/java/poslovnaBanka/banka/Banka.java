@@ -1,6 +1,10 @@
 package poslovnaBanka.banka;
 
+import poslovnaBanka.racuni.Clearing;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Banka")
@@ -21,8 +25,14 @@ public class Banka {
     private String swift_kod;
     private String obracunski_racun;
 
-    public Banka(){
+    @OneToOne
+    private Clearing aktivanClearing;
 
+    @OneToMany
+    private List<Clearing> obradjeniClearing;
+
+    public Banka(){
+        this.obradjeniClearing = new ArrayList<Clearing>();
     }
 
     public Banka(String sifra_banke, String PIB, String naziv, String adresa, String email, String web, String telefon, String fax, boolean banka, String swift_kod, String obracunski_racun) {
@@ -37,6 +47,23 @@ public class Banka {
         this.banka = banka;
         this.swift_kod = swift_kod;
         this.obracunski_racun = obracunski_racun;
+        this.obradjeniClearing = new ArrayList<Clearing>();
+    }
+
+    public List<Clearing> getObradjeniClearing() {
+        return obradjeniClearing;
+    }
+
+    public void setObradjeniClearing(List<Clearing> obradjeniClearing) {
+        this.obradjeniClearing = obradjeniClearing;
+    }
+
+    public Clearing getAktivanClearing() {
+        return aktivanClearing;
+    }
+
+    public void setAktivanClearing(Clearing aktivanClearing) {
+        this.aktivanClearing = aktivanClearing;
     }
 
     public long getId() {

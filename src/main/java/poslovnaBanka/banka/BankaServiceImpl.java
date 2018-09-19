@@ -29,4 +29,9 @@ public class BankaServiceImpl implements BankaService{
         return bankaRepository.findOne(id);
     }
 
+    @Override
+    public Banka save(Banka banka) {
+        return bankaRepository.save(banka);
+    }
+
 }
