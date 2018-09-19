@@ -1,5 +1,9 @@
 package poslovnaBanka.racuni;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -28,6 +32,7 @@ public class DnevnoStanjeRacuna {
     private double novo_stanje;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private RacuniLica racuniLica;
 
 
