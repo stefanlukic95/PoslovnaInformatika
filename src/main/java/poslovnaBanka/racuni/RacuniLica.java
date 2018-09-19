@@ -28,7 +28,7 @@ public class RacuniLica {
     private boolean vazeci;
 
     @OneToOne
-    private Valute valute;
+    private Valute valuta;
 
     @ManyToOne
     private Banka banka;
@@ -47,16 +47,16 @@ public class RacuniLica {
         this.br_racuna = br_racuna;
         this.datum_otvaranja = datum_otvaranja;
         this.vazeci = vazeci;
-        this.valute = valute;
+        this.valuta = valute;
         this.banka = banka;
     }
 
     public Valute getValute() {
-        return valute;
+        return valuta;
     }
 
     public void setValute(Valute valute) {
-        this.valute = valute;
+        this.valuta = valute;
     }
 
     public long getId() {
