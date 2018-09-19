@@ -30,11 +30,21 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
     }
 
     @Override
-    public AnalitikaIzvoda export(AnalitikaIzvoda analitikaIzvoda) throws IOException {
+    public AnalitikaIzvoda exportUplata(AnalitikaIzvoda analitikaIzvoda) throws IOException {
         XmlMapper xmlMapper = new XmlMapper();
         AnalitikaXml analitikaXml = new AnalitikaXml(analitikaIzvoda);
-        xmlMapper.writeValue(new File("export//analitika//analitika" + analitikaXml.getId() + ".xml"), analitikaXml);
-        File file = new File("export//analitika//analitika" + analitikaXml.getId() + ".xml");
+        xmlMapper.writeValue(new File("export//analitika//izvod_uplate" + analitikaXml.getId() + ".xml"), analitikaXml);
+        File file = new File("export//analitika//izvod_uplate" + analitikaXml.getId() + ".xml");
+        assertNotNull(file);
+        return null;
+    }
+
+    @Override
+    public AnalitikaIzvoda exportIsplata(AnalitikaIzvoda analitikaIzvoda) throws IOException {
+        XmlMapper xmlMapper = new XmlMapper();
+        AnalitikaXml analitikaXml = new AnalitikaXml(analitikaIzvoda);
+        xmlMapper.writeValue(new File("export//analitika//izvod_isplate" + analitikaXml.getId() + ".xml"), analitikaXml);
+        File file = new File("export//analitika//izvod_isplate" + analitikaXml.getId() + ".xml");
         assertNotNull(file);
         return null;
     }

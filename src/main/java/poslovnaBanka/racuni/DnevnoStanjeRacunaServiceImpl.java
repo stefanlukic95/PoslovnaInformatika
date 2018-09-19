@@ -1,9 +1,16 @@
 package poslovnaBanka.racuni;
 
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 
 @Service
 public class DnevnoStanjeRacunaServiceImpl implements DnevnoStanjeRacunaService{
@@ -45,6 +52,48 @@ public class DnevnoStanjeRacunaServiceImpl implements DnevnoStanjeRacunaService{
 
         DnevnoStanjeRacuna updateNasm = this.dnevnoStanjeRacunaRepository.save(nasmUpdt);
         return updateNasm;
+    }
+
+    @Override
+    public DnevnoStanjeRacuna getLast(RacuniLica racuniLica) {
+        List<DnevnoStanjeRacuna> stanja = dnevnoStanjeRacunaRepository.findAll();
+        List<DnevnoStanjeRacuna> stanjaRacun = new ArrayList<DnevnoStanjeRacuna>();
+        for(DnevnoStanjeRacuna s : stanja) {
+            if(s.getRacuniLica().getId() == racuniLica.getId()) {
+                stanjaRacun.add(s);
+            }
+        }
+        DnevnoStanjeRacuna ret = stanjaRacun.get(stanjaRacun.size()-1);
+        return ret;
+    }
+
+    @Override
+    public List<DnevnoStanjeRacuna> getByRacun(RacuniLica racuniLica) {
+        List<DnevnoStanjeRacuna> stanja = dnevnoStanjeRacunaRepository.findAll();
+        List<DnevnoStanjeRacuna> ret = new ArrayList<DnevnoStanjeRacuna>();
+        for(DnevnoStanjeRacuna d : stanja) {
+            if(d.getRacuniLica().getId() == racuniLica.getId()) {
+                ret.add(d);
+            }
+        }
+
+        return ret;
+    }
+
+    @Override
+    public List<DnevnoStanjeRacuna> export(long id, Date pocetak, Date kraj) throws IOException {
+        List<DnevnoStanjeRacuna> stanja = findAll();
+        List<DnevnoStanjeRacuna> ret = new ArrayList<DnevnoStanjeRacuna>();
+        for(DnevnoStanjeRacuna s: stanja) {
+            if(s.getRacuniLica().getId() == id && s.getDatum_prometa().after(pocetak) && s.getDatum_prometa().before(kraj)) {
+                ret.add(s);
+            }
+        }
+        XmlMapper xmlMapper = new XmlMapper();
+        xmlMapper.writeValue(new File("export//izvod-stanja//izvod-stanja" + id + ".xml"), ret);
+        File file = new File("export//izvod-stanja//izvod-stanja" + id + ".xml");
+        assertNotNull(file);
+        return ret;
     }
 
     @Override
