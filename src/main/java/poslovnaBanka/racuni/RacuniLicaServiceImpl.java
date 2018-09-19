@@ -11,6 +11,7 @@ import poslovnaBanka.klijent.FizickoLiceService;
 import poslovnaBanka.klijent.PravnoLice;
 import poslovnaBanka.klijent.PravnoLiceService;
 
+import java.util.Date;
 import java.util.List;
 
 @Transactional
@@ -29,6 +30,9 @@ public class RacuniLicaServiceImpl implements RacuniLicaService {
     @Autowired
     private BankaService bankaService;
 
+    @Autowired
+    private DnevnoStanjeRacunaService dnevnoStanjeRacunaService;
+
     @Override
     public List<RacuniLica> findAll() {
         return racuniLicaRepository.findAll();
@@ -46,6 +50,8 @@ public class RacuniLicaServiceImpl implements RacuniLicaService {
         PravnoLice pravnoLice = pravnoLiceService.findOne(id);
         racuniLica.setPravnoLice(pravnoLice);
         RacuniLica racun = racuniLicaRepository.save(racuniLica);
+        DnevnoStanjeRacuna dnevnoStanjeRacuna = new DnevnoStanjeRacuna(new Date(), 0, 0, 0,0,racun);
+        dnevnoStanjeRacunaService.create(dnevnoStanjeRacuna);
         return racun;
     }
 
@@ -56,6 +62,8 @@ public class RacuniLicaServiceImpl implements RacuniLicaService {
         FizickoLice fizickoLice = fizickoLiceService.findOne(id);
         racuniLica.setFizickoLice(fizickoLice);
         RacuniLica racun = racuniLicaRepository.save(racuniLica);
+        DnevnoStanjeRacuna dnevnoStanjeRacuna = new DnevnoStanjeRacuna(new Date(), 0, 0, 0,0,racun);
+        dnevnoStanjeRacunaService.create(dnevnoStanjeRacuna);
         return racun;
     }
 

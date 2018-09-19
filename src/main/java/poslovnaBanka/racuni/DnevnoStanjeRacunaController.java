@@ -7,6 +7,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RequestMapping
@@ -17,6 +21,9 @@ public class DnevnoStanjeRacunaController {
 
     @Autowired
     private DnevnoStanjeRacunaService dnevnoStanjeRacunaService;
+
+    @Autowired
+    private RacuniLicaService racuniLicaService;
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -36,14 +43,24 @@ public class DnevnoStanjeRacunaController {
             value ="/dnevnostanjeracuna/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<DnevnoStanjeRacuna> getDnevnoStanjeRacuna(@PathVariable("id") long id) {
-        DnevnoStanjeRacuna valute = this.dnevnoStanjeRacunaService.findOne(id);
-        if(valute == null){
-            return new ResponseEntity<DnevnoStanjeRacuna>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<DnevnoStanjeRacuna>(valute, HttpStatus.OK);
+    public ResponseEntity<List<DnevnoStanjeRacuna>> getDnevnoStanjeRacuna(@PathVariable("id") long id) {
+        RacuniLica racuniLica = racuniLicaService.findOne(id);
+        List<DnevnoStanjeRacuna> stanja = dnevnoStanjeRacunaService.getByRacun(racuniLica);
+        return new ResponseEntity<>(stanja, HttpStatus.OK);
     }
 
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/export/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<DnevnoStanjeRacuna>> exportStanja(@PathVariable("id") long id, @RequestParam("pocetak") String pocetak, @RequestParam("kraj") String kraj) throws ParseException, IOException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date datumPocetak = format.parse(pocetak);
+        Date datumKraj = format.parse(kraj);
+        List<DnevnoStanjeRacuna> ret = dnevnoStanjeRacunaService.export(id, datumPocetak, datumKraj);
+        return new ResponseEntity<>(ret, HttpStatus.OK);
+    }
 
     @RequestMapping(
             method = RequestMethod.POST,
@@ -88,4 +105,6 @@ public class DnevnoStanjeRacunaController {
         this.dnevnoStanjeRacunaService.delete(id);
         return new ResponseEntity<DnevnoStanjeRacuna>(HttpStatus.NO_CONTENT);
     }
+
+
 }
