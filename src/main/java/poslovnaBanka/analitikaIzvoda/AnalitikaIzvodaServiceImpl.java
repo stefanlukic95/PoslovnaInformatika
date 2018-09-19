@@ -4,6 +4,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import poslovnaBanka.ModelXml.AnalitikaXml;
 
 import java.io.File;
@@ -46,6 +47,16 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
         xmlMapper.writeValue(new File("export//analitika//izvod_isplate" + analitikaXml.getId() + ".xml"), analitikaXml);
         File file = new File("export//analitika//izvod_isplate" + analitikaXml.getId() + ".xml");
         assertNotNull(file);
+        return null;
+    }
+
+    @Override
+    public AnalitikaIzvoda importUplata(MultipartFile file) {
+        return null;
+    }
+
+    @Override
+    public AnalitikaIzvoda importIsplata(MultipartFile file) {
         return null;
     }
 

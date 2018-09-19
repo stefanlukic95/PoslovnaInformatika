@@ -47,17 +47,19 @@ public class AnalitikaIzvodaController {
 
     @RequestMapping(
             method = RequestMethod.POST,
-            value = "/analitika",
+            value = "/analitikaUplata",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<AnalitikaIzvoda> createAnalitikaUplata(@RequestBody AnalitikaIzvoda analitikaIzvoda) throws IOException {
+
+        RacuniLica racun = analitikaIzvoda.getRacun_duznika();
+        DnevnoStanjeRacuna pret = dnevnoStanjeRacunaService.getLast(racun);
+        DnevnoStanjeRacuna novo = new DnevnoStanjeRacuna(new Date(), pret.getNovo_stanje(), analitikaIzvoda.getIznos(), 0, pret.getNovo_stanje() + analitikaIzvoda.getIznos(), racun);
+        DnevnoStanjeRacuna d = dnevnoStanjeRacunaService.create(novo);
+        analitikaIzvoda.setDnevnoStanjeRacuna(d);
         AnalitikaIzvoda analitika = analitikaIzvodaService.create(analitikaIzvoda);
         analitikaIzvodaService.exportUplata(analitikaIzvoda);
-        RacuniLica racun = analitika.getRacun_duznika();
-        DnevnoStanjeRacuna pret = dnevnoStanjeRacunaService.getLast(racun);
-        DnevnoStanjeRacuna novo = new DnevnoStanjeRacuna(new Date(), pret.getNovo_stanje(), analitika.getIznos(), 0, pret.getNovo_stanje() + analitika.getIznos(), racun);
-        dnevnoStanjeRacunaService.create(novo);
         if((analitika.getIznos() >= 250000 || analitika.isHitno()) && racun.getBanka().getId() == bankaService.getBanka().getId()) {
             rtgsService.createRTGS(analitika);
         } else {
@@ -74,17 +76,19 @@ public class AnalitikaIzvodaController {
 
     @RequestMapping(
             method = RequestMethod.POST,
-            value = "/analitika",
+            value = "/analitikaIsplata",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<AnalitikaIzvoda> createAnalitikaIsplata(@RequestBody AnalitikaIzvoda analitikaIzvoda) throws IOException {
+
+        RacuniLica racun = analitikaIzvoda.getRacun_duznika();
+        DnevnoStanjeRacuna pret = dnevnoStanjeRacunaService.getLast(racun);
+        DnevnoStanjeRacuna novo = new DnevnoStanjeRacuna(new Date(), pret.getNovo_stanje(), 0, analitikaIzvoda.getIznos(), pret.getNovo_stanje() - analitikaIzvoda.getIznos(), racun);
+        DnevnoStanjeRacuna d = dnevnoStanjeRacunaService.create(novo);
+        analitikaIzvoda.setDnevnoStanjeRacuna(d);
         AnalitikaIzvoda analitika = analitikaIzvodaService.create(analitikaIzvoda);
         analitikaIzvodaService.exportIsplata(analitikaIzvoda);
-        RacuniLica racun = analitika.getRacun_duznika();
-        DnevnoStanjeRacuna pret = dnevnoStanjeRacunaService.getLast(racun);
-        DnevnoStanjeRacuna novo = new DnevnoStanjeRacuna(new Date(), pret.getNovo_stanje(), 0, analitika.getIznos(), pret.getNovo_stanje() - analitika.getIznos(), racun);
-        dnevnoStanjeRacunaService.create(novo);
         if((analitika.getIznos() >= 250000 || analitika.isHitno()) && racun.getBanka().getId() == bankaService.getBanka().getId()) {
             rtgsService.createRTGS(analitika);
         } else {
@@ -99,11 +103,17 @@ public class AnalitikaIzvodaController {
         return new ResponseEntity<AnalitikaIzvoda>(analitika, HttpStatus.OK);
     }
 
-
-
-    @PostMapping(value="/analitikaFile")
-    public ResponseEntity<AnalitikaIzvoda> importAnalitika(@RequestParam("file") MultipartFile file) {
+    @PostMapping(value="/loadAnalitikaIsplata")
+    public ResponseEntity<AnalitikaIzvoda> loadAnalitikaIsplata(@RequestParam("file") MultipartFile file) {
         System.out.println("FILE NAME: " + file.getOriginalFilename());
+        analitikaIzvodaService.importIsplata(file);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(value="/loadAnalitikaUplata")
+    public ResponseEntity<AnalitikaIzvoda> loadAnalitikaUplata(@RequestParam("file") MultipartFile file) {
+        System.out.println("FILE NAME: " + file.getOriginalFilename());
+        analitikaIzvodaService.importUplata(file);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
