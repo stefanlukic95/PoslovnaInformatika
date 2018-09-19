@@ -51,6 +51,7 @@ public class RacunLicaController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<RacuniLica> insertRacunFizicko(@RequestBody RacuniLica racun, @PathVariable("id") long id) throws Exception{
+
         RacuniLica racuniLica  = this.racuniLicaService.createRacunFizicko(racun, id);
 
         return new ResponseEntity<RacuniLica>(racuniLica, HttpStatus.CREATED);

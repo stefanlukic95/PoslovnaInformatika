@@ -64,6 +64,7 @@ public class TestData {
     private DnevnoStanjeRacunaRepository dnevnoStanjeRacunaRepository;
 
 
+
     @PostConstruct
     public void podaci(){
 
@@ -125,9 +126,11 @@ public class TestData {
 
 
             //RACUNI
-            RacuniLica racun1 =  new RacuniLica("0327832-43432-43",date2,true,valuta1,banka);
+            RacuniLica racun1 = new RacuniLica("0327832-43432-43",date2,true,valuta1,banka);
+            racun1.setFizickoLice(fizl);
             racuniLicaRepository.save(racun1);
             RacuniLica racun2 =  new RacuniLica("765432-768682-9797",date,true,valuta2,banka);
+            racun2.setPravnoLice(prav1);
             racuniLicaRepository.save(racun2);
 
             //KURSNA LISTA
