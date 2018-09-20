@@ -1,1 +1,17 @@
+<<<<<<< HEAD
 <RTGS><id>1</id><id_poruke/><analitikaIzvoda><id>1</id><br_stavke>123</br_stavke><duznik>duznik</duznik><svrha_placanja>svrha</svrha_placanja><poverilac_primalac>poverilac</poverilac_primalac><datum_prijema>1537446118215</datum_prijema><datum_valute>1537446118215</datum_valute><racun_duznika/><model_zaduzenja>0</model_zaduzenja><poziv_na_brZ/><racun_poverioca/><model_odobrenja>0</model_odobrenja><poziv_na_brO/><hitno>false</hitno><iznos>500.0</iznos><tip_greske>0</tip_greske><status/><valuta/><vrstaPlacanja/><dnevnoStanjeRacuna/><naseljenoMesto/></analitikaIzvoda></RTGS>
+=======
+<<<<<<< HEAD
+<RTGS><id>1</id><id_poruke/><analitikaIzvoda><id>1</id><br_stavke>123</br_stavke><duznik>duznik</duznik><svrha_placanja>svrha</svrha_placanja><poverilac_primalac>poverilac</poverilac_primalac><datum_prijema>1537444323359</datum_prijema><datum_valute>1537444323359</datum_valute><racun_duznika/><model_zaduzenja>0</model_zaduzenja><poziv_na_brZ/><racun_poverioca/><model_odobrenja>0</model_odobrenja><poziv_na_brO/><hitno>false</hitno><iznos>500.0</iznos><tip_greske>0</tip_greske><status/><valuta/><vrstaPlacanja/><dnevnoStanjeRacuna/><naseljenoMesto/></analitikaIzvoda></RTGS>
+=======
+<<<<<<< HEAD
+<RTGS><id>1</id><id_poruke/><analitikaIzvoda><id>1</id><br_stavke>123</br_stavke><duznik>duznik</duznik><svrha_placanja>svrha</svrha_placanja><poverilac_primalac>poverilac</poverilac_primalac><datum_prijema>1537445121664</datum_prijema><datum_valute>1537445121664</datum_valute><racun_duznika/><model_zaduzenja>0</model_zaduzenja><poziv_na_brZ/><racun_poverioca/><model_odobrenja>0</model_odobrenja><poziv_na_brO/><hitno>false</hitno><iznos>500.0</iznos><tip_greske>0</tip_greske><status/><valuta/><vrstaPlacanja/><dnevnoStanjeRacuna/><naseljenoMesto/></analitikaIzvoda></RTGS>
+=======
+<<<<<<< HEAD
+<RTGS><id>1</id><id_poruke/><analitikaIzvoda><id>1</id><br_stavke>123</br_stavke><duznik>duznik</duznik><svrha_placanja>svrha</svrha_placanja><poverilac_primalac>poverilac</poverilac_primalac><datum_prijema>1537373198720</datum_prijema><datum_valute>1537373198720</datum_valute><racun_duznika/><model_zaduzenja>0</model_zaduzenja><poziv_na_brZ/><racun_poverioca/><model_odobrenja>0</model_odobrenja><poziv_na_brO/><hitno>false</hitno><iznos>500.0</iznos><tip_greske>0</tip_greske><status/><valuta/><vrstaPlacanja/><dnevnoStanjeRacuna/><naseljenoMesto/></analitikaIzvoda></RTGS>
+=======
+<RTGS><id>1</id><id_poruke/><analitikaIzvoda><id>1</id><br_stavke>123</br_stavke><duznik>duznik</duznik><svrha_placanja>svrha</svrha_placanja><poverilac_primalac>poverilac</poverilac_primalac><datum_prijema>1537368999279</datum_prijema><datum_valute>1537368999279</datum_valute><racun_duznika/><model_zaduzenja>0</model_zaduzenja><poziv_na_brZ/><racun_poverioca/><model_odobrenja>0</model_odobrenja><poziv_na_brO/><hitno>false</hitno><iznos>500.0</iznos><tip_greske>0</tip_greske><status/><valuta/><vrstaPlacanja/><dnevnoStanjeRacuna/><naseljenoMesto/></analitikaIzvoda></RTGS>
+>>>>>>> cc8dcd14733fa7ba32c2047f326f3e616986933f
+>>>>>>> b9b5dff071f11725d705ba3f6342af017a54dde2
+>>>>>>> bfff55b51a579fc044d779170d5ca71b9cb0ce49
+>>>>>>> 1b362acac3c700ad27e2eb4ff625d69cea61dfd0
