@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import poslovnaBanka.ModelXml.AnalitikaXml;
+import poslovnaBanka.kurs.KursnaListaService;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +21,9 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
     @Autowired
     private AnalitikaIzvodaRepository analitikaIzvodaRepository;
 
+    @Autowired
+    private KursnaListaService kursnaListaService;
+
     @Override
     public List<AnalitikaIzvoda> findAll() {
         return analitikaIzvodaRepository.findAll();
@@ -27,6 +31,7 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
 
     @Override
     public AnalitikaIzvoda create(AnalitikaIzvoda analitikaIzvoda) {
+        analitikaIzvoda.setDatum_valute(kursnaListaService.findLast().getDatum());
         return analitikaIzvodaRepository.save(analitikaIzvoda);
     }
 

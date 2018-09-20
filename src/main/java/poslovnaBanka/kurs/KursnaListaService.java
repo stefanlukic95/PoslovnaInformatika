@@ -4,4 +4,5 @@ import java.util.List;
 
 public interface KursnaListaService {
     List<KursnaLista> findAll();
+    KursnaLista findLast();
 }
