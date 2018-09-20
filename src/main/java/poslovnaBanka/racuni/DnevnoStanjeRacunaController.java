@@ -51,10 +51,10 @@ public class DnevnoStanjeRacunaController {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            value = "/export/{id}",
+            value = "/dnevnostanjeracuna/export/{id}/datumi",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<List<DnevnoStanjeRacuna>> exportStanja(@PathVariable("id") long id, @RequestParam("pocetak") String pocetak, @RequestParam("kraj") String kraj) throws ParseException, IOException {
+    public ResponseEntity<List<DnevnoStanjeRacuna>> exportStanja(@PathVariable("id") long id, @RequestParam("poc") String pocetak, @RequestParam("kraj") String kraj) throws ParseException, IOException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date datumPocetak = format.parse(pocetak);
         Date datumKraj = format.parse(kraj);
