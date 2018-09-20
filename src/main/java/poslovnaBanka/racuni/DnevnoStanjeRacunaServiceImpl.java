@@ -1,5 +1,6 @@
 package poslovnaBanka.racuni;
 
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,6 +91,7 @@ public class DnevnoStanjeRacunaServiceImpl implements DnevnoStanjeRacunaService{
             }
         }
         XmlMapper xmlMapper = new XmlMapper();
+        xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
         xmlMapper.writeValue(new File("export//izvod-stanja//izvod-stanja" + id + ".xml"), ret);
         File file = new File("export//izvod-stanja//izvod-stanja" + id + ".xml");
         assertNotNull(file);
