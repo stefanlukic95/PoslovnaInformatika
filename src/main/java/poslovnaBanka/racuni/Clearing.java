@@ -1,5 +1,6 @@
 package poslovnaBanka.racuni;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import poslovnaBanka.analitikaIzvoda.AnalitikaIzvoda;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Clearing {
     private Date datum;
 
     @OneToMany
+    @JsonIgnore
     private List<AnalitikaIzvoda> pojedinacnoPlacanje;
 
     public Clearing(){

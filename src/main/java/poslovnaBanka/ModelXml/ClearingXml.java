@@ -23,6 +23,10 @@ public class ClearingXml {
     private String datum;
     private List<AnalitikaXml> placanja;
 
+    public ClearingXml() {
+
+    }
+
     public ClearingXml(Clearing clearing) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         this.id = clearing.getId();

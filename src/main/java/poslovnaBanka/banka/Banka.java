@@ -12,7 +12,7 @@ public class Banka {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private long id;
     private String sifra_banke;
     private String PIB;
     private String naziv;
@@ -67,7 +67,7 @@ public class Banka {
     }
 
     public long getId() {
-        return Id;
+        return id;
     }
 
     public String getSifra_banke() {
