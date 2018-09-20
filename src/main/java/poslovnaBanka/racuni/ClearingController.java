@@ -36,6 +36,7 @@ public class ClearingController {
         clearing.setDatum(new Date());
         clearingService.exportClearing(clearing);
         Clearing clearing1 = new Clearing();
+        clearingService.save(clearing1);
         bankaService.getBanka().setAktivanClearing(clearing1);
         bankaService.save(bankaService.getBanka());
         return new ResponseEntity<>(HttpStatus.OK);
