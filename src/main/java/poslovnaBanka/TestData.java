@@ -131,33 +131,7 @@ public class TestData {
         String datum3 = "2016-03-02";
         DateFormat format = new SimpleDateFormat("YYYY-MM-DD");
 
-        AnalitikaIzvoda analitikaIzvoda = new AnalitikaIzvoda();
-        analitikaIzvoda.setBr_stavke(123);
-        analitikaIzvoda.setDatum_prijema(new Date());
-        analitikaIzvoda.setDuznik("duznik");
-        analitikaIzvoda.setSvrha_placanja("svrha");
-        analitikaIzvoda.setPoverilac_primalac("poverilac");
-        analitikaIzvoda.setDatum_valute(new Date());
-        analitikaIzvoda.setIznos(500);
-        AnalitikaIzvoda analitika = analitikaIzvodaService.create(analitikaIzvoda);
-        AnalitikaIzvoda analitikaIzvoda1 = new AnalitikaIzvoda();
-        analitikaIzvoda1.setBr_stavke(12);
-        analitikaIzvoda1.setDatum_prijema(new Date());
-        analitikaIzvoda1.setDuznik("duznik");
-        analitikaIzvoda1.setSvrha_placanja("svrha");
-        analitikaIzvoda1.setPoverilac_primalac("poverilac");
-        analitikaIzvoda1.setDatum_valute(new Date());
-        analitikaIzvoda1.setIznos(800);
-        AnalitikaIzvoda analitika1 = analitikaIzvodaService.create(analitikaIzvoda);
-        RTGS rtgs = rtgsService.createRTGS(analitika);
-        rtgsService.exportRTGS(rtgs);
 
-        List<AnalitikaIzvoda> analitike = new ArrayList<AnalitikaIzvoda>();
-        analitike.add(analitikaIzvoda);
-        analitike.add(analitikaIzvoda1);
-        clearing.setPojedinacnoPlacanje(analitike);
-        clearing.setDatum(new Date());
-        clearingService.exportClearing(clearing);
 
 
         try {
@@ -214,6 +188,34 @@ public class TestData {
             VrstePlacanja vrstePlacanja2 =  new VrstePlacanja(124  ,"naziv2");
             vrstePlacanjaRepository.save(vrstePlacanja2);
 
+            //ANALITIKA
+        AnalitikaIzvoda analitikaIzvoda = new AnalitikaIzvoda();
+        analitikaIzvoda.setBr_stavke(123);
+        analitikaIzvoda.setDatum_prijema(new Date());
+        analitikaIzvoda.setDuznik("duznik");
+        analitikaIzvoda.setSvrha_placanja("svrha");
+        analitikaIzvoda.setPoverilac_primalac("poverilac");
+        analitikaIzvoda.setDatum_valute(new Date());
+        analitikaIzvoda.setIznos(500);
+        AnalitikaIzvoda analitika = analitikaIzvodaService.create(analitikaIzvoda);
+        AnalitikaIzvoda analitikaIzvoda1 = new AnalitikaIzvoda();
+        analitikaIzvoda1.setBr_stavke(12);
+        analitikaIzvoda1.setDatum_prijema(new Date());
+        analitikaIzvoda1.setDuznik("duznik");
+        analitikaIzvoda1.setSvrha_placanja("svrha");
+        analitikaIzvoda1.setPoverilac_primalac("poverilac");
+        analitikaIzvoda1.setDatum_valute(new Date());
+        analitikaIzvoda1.setIznos(800);
+        AnalitikaIzvoda analitika1 = analitikaIzvodaService.create(analitikaIzvoda);
+        RTGS rtgs = rtgsService.createRTGS(analitika);
+        rtgsService.exportRTGS(rtgs);
+
+        List<AnalitikaIzvoda> analitike = new ArrayList<AnalitikaIzvoda>();
+        analitike.add(analitikaIzvoda);
+        analitike.add(analitikaIzvoda1);
+        clearing.setPojedinacnoPlacanje(analitike);
+        clearing.setDatum(new Date());
+        clearingService.exportClearing(clearing);
 
 
 

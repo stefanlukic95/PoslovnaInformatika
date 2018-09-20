@@ -19,12 +19,15 @@ public class KursnaListaServiceImpl implements KursnaListaService{
     @Override
     public KursnaLista findLast() {
         List<KursnaLista> liste = findAll();
-        KursnaLista lista = liste.get(0);
-        for(KursnaLista k : liste) {
-            if(k.getDatum().after(lista.getDatum())) {
-                lista = k;
+        if(liste.size() > 0) {
+            KursnaLista lista = liste.get(0);
+            for (KursnaLista k : liste) {
+                if (k.getDatum().after(lista.getDatum())) {
+                    lista = k;
+                }
             }
+            return lista;
         }
-        return lista;
+        return null;
     }
 }
