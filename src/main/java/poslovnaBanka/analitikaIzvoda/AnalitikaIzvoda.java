@@ -20,7 +20,7 @@ public class AnalitikaIzvoda {
     private long br_stavke;
 
     @NotNull
-    private String duznik;
+    private String duznik; //platilac
 
     @NotNull
     private String svrha_placanja;
@@ -35,7 +35,7 @@ public class AnalitikaIzvoda {
     private Date datum_valute;
 
     @ManyToOne
-    private RacuniLica racun_duznika;
+    private RacuniLica racun_duznika; //racun platioca i primaoca
 
     private int model_zaduzenja;
 
