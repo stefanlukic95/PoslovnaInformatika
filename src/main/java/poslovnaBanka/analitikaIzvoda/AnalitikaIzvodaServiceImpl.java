@@ -56,6 +56,17 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
     }
 
     @Override
+    public AnalitikaIzvoda exportPrenos(AnalitikaIzvoda analitikaIzvoda) throws IOException {
+        XmlMapper xmlMapper = new XmlMapper();
+        AnalitikaXml analitikaXml = new AnalitikaXml(analitikaIzvoda);
+        xmlMapper.writeValue(new File("export//analitika//izvod prenosa" + analitikaXml.getId() + ".xml"), analitikaXml);
+        File file = new File("export//analitika//izvod prenosa" + analitikaXml.getId() + ".xml");
+        assertNotNull(file);
+        return null;
+    }
+
+
+    @Override
     public AnalitikaIzvoda importUplata(MultipartFile file) {
         return null;
     }

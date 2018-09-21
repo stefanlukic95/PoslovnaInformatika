@@ -18,8 +18,7 @@ public class UkidanjeRacuna {
 
     }
 
-    public UkidanjeRacuna(int id_ukidanja, Date datum_ukidanja, String prenos_sredstva) {
-        this.id_ukidanja = id_ukidanja;
+    public UkidanjeRacuna( Date datum_ukidanja, String prenos_sredstva) {
         this.datum_ukidanja = datum_ukidanja;
         this.prenos_sredstva = prenos_sredstva;
     }
@@ -28,13 +27,6 @@ public class UkidanjeRacuna {
         return id;
     }
 
-    public int getId_ukidanja() {
-        return id_ukidanja;
-    }
-
-    public void setId_ukidanja(int id_ukidanja) {
-        this.id_ukidanja = id_ukidanja;
-    }
 
     public Date getDatum_ukidanja() {
         return datum_ukidanja;

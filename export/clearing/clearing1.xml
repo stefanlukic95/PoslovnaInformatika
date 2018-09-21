@@ -2,7 +2,7 @@
   <id>1</id>
   <id_poruke/>
   <ukupan_iznos>0.0</ukupan_iznos>
-  <datum>2018-09-20</datum>
+  <datum>2018-09-21</datum>
   <pojedinacnoPlacanje>
     <pojedinacnoPlacanje>
       <id>1</id>
@@ -10,7 +10,7 @@
       <duznik>duznik</duznik>
       <svrha_placanja>svrha</svrha_placanja>
       <poverilac_primalac>poverilac</poverilac_primalac>
-      <datum_prijema>2018-09-20</datum_prijema>
+      <datum_prijema>2018-09-21</datum_prijema>
       <datum_valute>2017-01-01</datum_valute>
       <racun_duznika/>
       <model_zaduzenja>0</model_zaduzenja>
@@ -33,8 +33,8 @@
       <duznik>duznik</duznik>
       <svrha_placanja>svrha</svrha_placanja>
       <poverilac_primalac>poverilac</poverilac_primalac>
-      <datum_prijema>2018-09-20</datum_prijema>
-      <datum_valute>2018-09-20</datum_valute>
+      <datum_prijema>2018-09-21</datum_prijema>
+      <datum_valute>2018-09-21</datum_valute>
       <racun_duznika/>
       <model_zaduzenja>0</model_zaduzenja>
       <poziv_na_brZ/>
