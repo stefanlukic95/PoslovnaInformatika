@@ -1,5 +1,6 @@
 package poslovnaBanka.analitikaIzvoda;
 
+import poslovnaBanka.ModelXml.AnalitikaXml;
 import poslovnaBanka.naseljenoMesto.NaseljenoMesto;
 import poslovnaBanka.racuni.Clearing;
 import poslovnaBanka.racuni.DnevnoStanjeRacuna;
@@ -9,6 +10,8 @@ import poslovnaBanka.valute.Valute;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 @Entity
 @Table(name = "AnalitikaIzvoda")
@@ -93,6 +96,30 @@ public class AnalitikaIzvoda {
         this.vrstaPlacanja = vrstaPlacanja;
         this.dnevnoStanjeRacuna = dnevnoStanjeRacuna;
         this.naseljenoMesto = naseljenoMesto;
+    }
+
+    public AnalitikaIzvoda(AnalitikaXml analitikaXml) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        this.br_stavke = analitikaXml.getBr_stavke();
+        this.duznik = analitikaXml.getDuznik();
+        this.svrha_placanja = analitikaXml.getSvrha_placanja();
+        this.poverilac_primalac = analitikaXml.getPoverilac_primalac();
+        this.datum_prijema = format.parse(analitikaXml.getDatum_prijema());
+        this.datum_valute = format.parse(analitikaXml.getDatum_valute());
+        this.racun_duznika = analitikaXml.getRacun_duznika();
+        this.model_zaduzenja = analitikaXml.getModel_zaduzenja();
+        this.poziv_na_brZ = analitikaXml.getPoziv_na_brZ();
+        this.racun_poverioca = analitikaXml.getRacun_poverioca();
+        this.model_odobrenja = analitikaXml.getModel_odobrenja();
+        this.poziv_na_brO = analitikaXml.getPoziv_na_brO();
+        this.hitno = analitikaXml.isHitno();
+        this.iznos = analitikaXml.getIznos();
+        this.tip_greske = analitikaXml.getTip_greske();
+        this.status = analitikaXml.getStatus();
+        this.valuta = analitikaXml.getValuta();
+        this.vrstaPlacanja = analitikaXml.getVrstaPlacanja();
+        this.dnevnoStanjeRacuna = analitikaXml.getDnevnoStanjeRacuna();
+        this.naseljenoMesto = analitikaXml.getNaseljenoMesto();
     }
 
     public long getId() {

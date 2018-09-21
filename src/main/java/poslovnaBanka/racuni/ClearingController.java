@@ -27,7 +27,7 @@ public class ClearingController {
     private ClearingService clearingService;
 
     @RequestMapping(
-            method = RequestMethod.POST,
+            method = RequestMethod.GET,
             value = "/obradiClearing",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -35,11 +35,20 @@ public class ClearingController {
         Clearing clearing = bankaService.getBanka().getAktivanClearing();
         clearing.setDatum(new Date());
         clearingService.exportClearing(clearing);
-        List<Clearing> klirinzi = bankaService.getBanka().getObradjeniClearing();
-        klirinzi.add(clearing);
         Clearing clearing1 = new Clearing();
+        clearingService.save(clearing1);
         bankaService.getBanka().setAktivanClearing(clearing1);
         bankaService.save(bankaService.getBanka());
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/getClearings",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<?> getObradjeni() {
+        List<Clearing> obradjeni = clearingService.getObradjeni();
+        return new ResponseEntity<List<Clearing>>(obradjeni, HttpStatus.OK);
     }
 }

@@ -25,7 +25,10 @@ public class RacunLicaController {
 
     public ResponseEntity<List<RacuniLica>> getAll(){
         List<RacuniLica> racun = racuniLicaService.findAll();
-
+        for(RacuniLica r: racun) {
+            System.out.println("KONTROLEEEEEEEEER");
+            System.out.println(r.getBr_racuna());
+        }
         return new ResponseEntity<List<RacuniLica>>(racun,HttpStatus.OK);
     }
 

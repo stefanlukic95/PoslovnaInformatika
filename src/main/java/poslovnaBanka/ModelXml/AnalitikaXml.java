@@ -54,6 +54,10 @@ public class AnalitikaXml {
 
     private NaseljenoMesto naseljenoMesto;
 
+    public AnalitikaXml() {
+
+    }
+
     public AnalitikaXml(AnalitikaIzvoda analitikaIzvoda) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         this.id = analitikaIzvoda.getId();

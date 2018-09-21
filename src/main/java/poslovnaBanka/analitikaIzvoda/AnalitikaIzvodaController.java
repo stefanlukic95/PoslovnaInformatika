@@ -11,6 +11,7 @@ import poslovnaBanka.racuni.*;
 
 import javax.print.attribute.standard.Media;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -133,16 +134,54 @@ public class AnalitikaIzvodaController {
     }
 
     @PostMapping(value="/loadAnalitikaIsplata")
-    public ResponseEntity<AnalitikaIzvoda> loadAnalitikaIsplata(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> loadAnalitikaIsplata(@RequestParam("file") MultipartFile file) throws IOException, ParseException {
         System.out.println("FILE NAME: " + file.getOriginalFilename());
-        analitikaIzvodaService.importIsplata(file);
+        AnalitikaIzvoda analitikaIzvoda = analitikaIzvodaService.importIsplata(file);
+        RacuniLica racun = analitikaIzvoda.getRacun_duznika();
+        DnevnoStanjeRacuna pret = dnevnoStanjeRacunaService.getLast(racun);
+        DnevnoStanjeRacuna novo = new DnevnoStanjeRacuna(new Date(), pret.getNovo_stanje(), 0, analitikaIzvoda.getIznos(), pret.getNovo_stanje() - analitikaIzvoda.getIznos(), racun);
+        DnevnoStanjeRacuna d = dnevnoStanjeRacunaService.create(novo);
+        analitikaIzvoda.setDnevnoStanjeRacuna(d);
+        AnalitikaIzvoda analitika = analitikaIzvodaService.create(analitikaIzvoda);
+        System.out.println(analitika.getId());
+        analitikaIzvodaService.exportIsplata(analitikaIzvoda);
+        if((analitika.getIznos() >= 250000 || analitika.isHitno()) && racun.getBanka().getId() == bankaService.getBanka().getId()) {
+            rtgsService.createRTGS(analitika);
+        } else {
+            Clearing clearing = bankaService.getBanka().getAktivanClearing();
+            clearing.setUkupan_iznos(clearing.getUkupan_iznos() + analitika.getIznos());
+            List<AnalitikaIzvoda> analitike = clearing.getPojedinacnoPlacanje();
+            analitike.add(analitika);
+            clearing.setPojedinacnoPlacanje(analitike);
+            clearingService.save(clearing);
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(value="/loadAnalitikaUplata")
-    public ResponseEntity<AnalitikaIzvoda> loadAnalitikaUplata(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> loadAnalitikaUplata(@RequestParam("file") MultipartFile file) throws IOException, ParseException {
         System.out.println("FILE NAME: " + file.getOriginalFilename());
-        analitikaIzvodaService.importUplata(file);
+        AnalitikaIzvoda analitikaIzvoda = analitikaIzvodaService.importUplata(file);
+
+        RacuniLica racun = analitikaIzvoda.getRacun_duznika();
+        DnevnoStanjeRacuna pret = dnevnoStanjeRacunaService.getLast(racun);
+        DnevnoStanjeRacuna novo = new DnevnoStanjeRacuna(new Date(), pret.getNovo_stanje(), analitikaIzvoda.getIznos(), 0, pret.getNovo_stanje() + analitikaIzvoda.getIznos(), racun);
+        DnevnoStanjeRacuna d = dnevnoStanjeRacunaService.create(novo);
+        analitikaIzvoda.setDnevnoStanjeRacuna(d);
+        AnalitikaIzvoda analitika = analitikaIzvodaService.create(analitikaIzvoda);
+        analitikaIzvodaService.exportUplata(analitikaIzvoda);
+        if((analitika.getIznos() >= 250000 || analitika.isHitno()) && racun.getBanka().getId() == bankaService.getBanka().getId()) {
+            rtgsService.createRTGS(analitika);
+        } else {
+            Clearing clearing = bankaService.getBanka().getAktivanClearing();
+            clearing.setUkupan_iznos(clearing.getUkupan_iznos() + analitika.getIznos());
+            List<AnalitikaIzvoda> analitike = clearing.getPojedinacnoPlacanje();
+            analitike.add(analitika);
+            clearing.setPojedinacnoPlacanje(analitike);
+            clearingService.save(clearing);
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
