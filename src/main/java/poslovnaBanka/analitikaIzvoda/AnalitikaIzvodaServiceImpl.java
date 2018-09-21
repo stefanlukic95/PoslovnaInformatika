@@ -1,6 +1,7 @@
 package poslovnaBanka.analitikaIzvoda;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,7 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
     public AnalitikaIzvoda exportUplata(AnalitikaIzvoda analitikaIzvoda) throws IOException {
         XmlMapper xmlMapper = new XmlMapper();
         AnalitikaXml analitikaXml = new AnalitikaXml(analitikaIzvoda);
+        xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
         xmlMapper.writeValue(new File("export//analitika//izvod_uplate" + analitikaXml.getId() + ".xml"), analitikaXml);
         File file = new File("export//analitika//izvod_uplate" + analitikaXml.getId() + ".xml");
         assertNotNull(file);
@@ -51,6 +53,7 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
     public AnalitikaIzvoda exportIsplata(AnalitikaIzvoda analitikaIzvoda) throws IOException {
         XmlMapper xmlMapper = new XmlMapper();
         AnalitikaXml analitikaXml = new AnalitikaXml(analitikaIzvoda);
+        xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
         xmlMapper.writeValue(new File("export//analitika//izvod_isplate" + analitikaXml.getId() + ".xml"), analitikaXml);
         File file = new File("export//analitika//izvod_isplate" + analitikaXml.getId() + ".xml");
         assertNotNull(file);

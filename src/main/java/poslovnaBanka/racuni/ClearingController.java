@@ -44,7 +44,7 @@ public class ClearingController {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            value = "/obradiClearing",
+            value = "/getClearings",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<?> getObradjeni() {
