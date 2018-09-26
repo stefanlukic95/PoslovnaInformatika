@@ -60,6 +60,8 @@ public class DnevnoStanjeRacunaServiceImpl implements DnevnoStanjeRacunaService{
         List<DnevnoStanjeRacuna> stanja = dnevnoStanjeRacunaRepository.findAll();
         List<DnevnoStanjeRacuna> stanjaRacun = new ArrayList<DnevnoStanjeRacuna>();
         for(DnevnoStanjeRacuna s : stanja) {
+            System.out.println(s.getRacuniLica().getId());
+            System.out.println(racuniLica.getId());
             if(s.getRacuniLica().getId() == racuniLica.getId()) {
                 stanjaRacun.add(s);
             }

@@ -1,0 +1,58 @@
+<ArrayList>
+  <item>
+    <id>3</id>
+    <datum_prometa>1537958304006</datum_prometa>
+    <prethodno_stanje>137.5</prethodno_stanje>
+    <promet_korist>237.5</promet_korist>
+    <promet_teren>0.0</promet_teren>
+    <novo_stanje>375.0</novo_stanje>
+    <racuniLica>
+      <id>2</id>
+      <br_racuna>765432-768682-9797</br_racuna>
+      <datum_otvaranja>2016-12-31</datum_otvaranja>
+      <vazeci>true</vazeci>
+      <banka>
+        <id>1</id>
+        <sifra_banke>234234</sifra_banke>
+        <naziv>Banka intesa</naziv>
+        <adresa>Ulica 1</adresa>
+        <email>banka@gmail.com</email>
+        <web>web1</web>
+        <telefon>021-42343-5345</telefon>
+        <fax>011-324-4324</fax>
+        <banka>true</banka>
+        <swift_kod>34244234</swift_kod>
+        <obracunski_racun>64364-754754-8434763</obracunski_racun>
+        <aktivanClearing>
+          <id>1</id>
+          <id_poruke/>
+          <ukupan_iznos>0.0</ukupan_iznos>
+          <datum/>
+        </aktivanClearing>
+        <pib>4325</pib>
+      </banka>
+      <fizickoLice/>
+      <pravnoLice>
+        <id>1</id>
+        <naziv>Mirko Mirkovic</naziv>
+        <email>mirko@gmail.com</email>
+        <adresa>ulica obicna 1</adresa>
+        <br_telefona>021-4324-5435</br_telefona>
+        <datum_registracije>1483225200000</datum_registracije>
+        <pib>1244</pib>
+      </pravnoLice>
+      <valute>
+        <id>2</id>
+        <id_valute>3255551</id_valute>
+        <sifra>dol</sifra>
+        <naziv>dolar</naziv>
+        <domicilna>false</domicilna>
+        <drzava>
+          <id>2</id>
+          <sifra_drzave>ESP</sifra_drzave>
+          <naziv>Spanija</naziv>
+        </drzava>
+      </valute>
+    </racuniLica>
+  </item>
+</ArrayList>

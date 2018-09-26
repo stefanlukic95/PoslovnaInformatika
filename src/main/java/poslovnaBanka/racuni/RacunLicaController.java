@@ -102,5 +102,14 @@ public class RacunLicaController {
         return new ResponseEntity<RacuniLica>(HttpStatus.NO_CONTENT);
     }
 
+    @RequestMapping(
+            method = RequestMethod.DELETE,
+            value = "/analitikaPrenos/{id}"
+    )
+    public ResponseEntity<RacuniLica> deleteRacun2(@PathVariable("id") long id){
+        this.racuniLicaService.delete(id);
+        return new ResponseEntity<RacuniLica>(HttpStatus.NO_CONTENT);
+    }
+
 
 }
