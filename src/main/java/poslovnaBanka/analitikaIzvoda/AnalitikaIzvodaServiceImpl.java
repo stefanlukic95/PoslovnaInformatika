@@ -61,7 +61,6 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
     }
 
     @Override
-<<<<<<< HEAD
     public AnalitikaIzvoda exportPrenos(AnalitikaIzvoda analitikaIzvoda) throws IOException {
         XmlMapper xmlMapper = new XmlMapper();
         AnalitikaXml analitikaXml = new AnalitikaXml(analitikaIzvoda);
@@ -71,11 +70,6 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
         return null;
     }
 
-
-    @Override
-    public AnalitikaIzvoda importUplata(MultipartFile file) {
-        return null;
-=======
     public AnalitikaIzvoda importUplata(MultipartFile file) throws IOException, ParseException {
         File f = null;
         f = Files.createTempFile("temp", file.getOriginalFilename()).toFile();
@@ -86,7 +80,6 @@ public class AnalitikaIzvodaServiceImpl implements AnalitikaIzvodaService {
         AnalitikaXml analitikaXml = xmlMapper.readValue(analitikaIsplata, AnalitikaXml.class);
         AnalitikaIzvoda analitika = new AnalitikaIzvoda(analitikaXml);
         return analitika;
->>>>>>> 6983c2dc07940efbcd63b1e7d217ea23e21e9ea3
     }
 
     @Override
